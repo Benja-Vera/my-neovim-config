@@ -223,6 +223,7 @@ vim.api.nvim_create_autocmd('TextYankPost', {
 vim.api.nvim_create_autocmd('FileType', {
   pattern = { 'markdown', 'text', 'tex', 'quarto' },
   callback = function()
+    vim.cmd 'colorscheme gruvbox'
     vim.opt_local.spell = true
     vim.opt_local.spelllang = { 'en', 'es' }
     -- Make j and k move by screen lines
