@@ -136,42 +136,91 @@ vim.api.nvim_create_autocmd('TextYankPost', {
 
 vim.api.nvim_create_autocmd('FileType', {
   pattern = { 'markdown', 'text', 'tex', 'quarto' },
-  callback = function()
-    vim.cmd 'colorscheme gruvbox'
+  callback = function(args)
+    local ft = vim.bo[args.buf].filetype
+
+    vim.cmd.colorscheme 'gruvbox'
     vim.opt_local.spell = true
     vim.opt_local.spelllang = { 'en', 'es' }
-    -- Make j and k move by screen lines
-    vim.keymap.set('n', 'j', 'gj', { noremap = true })
-    vim.keymap.set('n', 'k', 'gk', { noremap = true })
-    vim.keymap.set('v', 'j', 'gj', { noremap = true })
-    vim.keymap.set('v', 'k', 'gk', { noremap = true })
-    vim.keymap.set('s', 'j', 'j', { noremap = true })
-    vim.keymap.set('s', 'k', 'k', { noremap = true })
 
-    local ls = require 'luasnip'
-    local shared_snips = require 'snippets.math_shared'
-    local snippet = shared_snips.paren_frac.snippet
+    local opts = { noremap = true, buffer = args.buf }
+    vim.keymap.set('n', 'j', 'gj', opts)
+    vim.keymap.set('n', 'k', 'gk', opts)
+    vim.keymap.set('v', 'j', 'gj', opts)
+    vim.keymap.set('v', 'k', 'gk', opts)
+    vim.keymap.set('s', 'j', 'j', opts)
+    vim.keymap.set('s', 'k', 'k', opts)
 
-    vim.keymap.set('i', '/', function()
-      local line = vim.fn.getline '.'
-      local col = vim.fn.col '.'
-      local before_cursor = line:sub(1, col - 1)
+    if ft == 'quarto' then
+      vim.keymap.set('n', '<leader>qp', ':QuartoPreview<CR>', {
+        buffer = args.buf,
+        noremap = true,
+        silent = true,
+        desc = 'Preview Quarto document',
+      })
+    end
 
-      if before_cursor:match '%)$' then
-        -- trigger the snippet if it ends in a closing paren
-        ls.snip_expand(snippet) -- index 1 = our snippet
-      else
-        -- insert slash normally
-        vim.api.nvim_feedkeys('/', 'n', false)
+    local function toggle_surrounding_delimiters()
+      local row, col = unpack(vim.api.nvim_win_get_cursor(0))
+      local line = vim.api.nvim_get_current_line()
+      col = col + 1 -- Lua string index
+
+      local patterns = {
+        { plain = { '(', ')' }, latex = { '\\left(', '\\right)' }, symbol = '()' },
+        { plain = { '[', ']' }, latex = { '\\left[', '\\right]' }, symbol = '[]' },
+        { plain = { '{', '}' }, latex = { '\\left\\{', '\\right\\}' }, symbol = '{}' },
+      }
+
+      for _, pair in ipairs(patterns) do
+        -- Look for LaTeX-style delimiters first
+        local latex_start_pat = vim.pesc(pair.latex[1])
+        local latex_end_pat = vim.pesc(pair.latex[2])
+
+        local s, e = line:find(latex_start_pat .. '(.-)' .. latex_end_pat)
+        if s and e and s <= col and col <= e then
+          local inner = line:sub(s + #pair.latex[1], e - #pair.latex[2])
+          local new_line = line:sub(1, s - 1) .. pair.plain[1] .. inner .. pair.plain[2] .. line:sub(e + 1)
+          local new_col = s + math.min(col - s - #pair.latex[1] + 1, #inner)
+          vim.api.nvim_set_current_line(new_line)
+          vim.api.nvim_win_set_cursor(0, { row, new_col - 1 })
+          return
+        end
+
+        -- Find all balanced pairs using a stack to track nesting
+        local opener = pair.plain[1]
+        local closer = pair.plain[2]
+        local stack = {}
+        local innermost = nil
+
+        for i = 1, #line do
+          local char = line:sub(i, i)
+          if char == opener then
+            table.insert(stack, i)
+          elseif char == closer and #stack > 0 then
+            local start_pos = table.remove(stack)
+            local end_pos = i
+            if start_pos <= col and col <= end_pos then
+              -- Choose the smallest enclosing (innermost) match
+              if not innermost or (end_pos - start_pos) < (innermost[2] - innermost[1]) then
+                innermost = { start_pos, end_pos }
+              end
+            end
+          end
+        end
+
+        if innermost then
+          local s, e = unpack(innermost)
+          local inner = line:sub(s + 1, e - 1)
+          local new_line = line:sub(1, s - 1) .. pair.latex[1] .. inner .. pair.latex[2] .. line:sub(e + 1)
+          local new_col = s + #pair.latex[1] + math.min(col - s - 1, #inner)
+          vim.api.nvim_set_current_line(new_line)
+          vim.api.nvim_win_set_cursor(0, { row, new_col - 1 })
+          return
+        end
       end
-    end, { buffer = true, desc = 'Context-aware / for \\frac', noremap = true, expr = false })
-  end,
-})
+    end
 
-vim.api.nvim_create_autocmd('FileType', {
-  pattern = 'quarto',
-  callback = function()
-    vim.keymap.set('n', '<leader>qp', ':QuartoPreview<CR>', { buffer = true, noremap = true, silent = true })
+    vim.keymap.set('n', 'tsd', toggle_surrounding_delimiters, { buffer = true, desc = 'Toggle LaTeX-style delimiters' })
   end,
 })
 
@@ -763,39 +812,26 @@ require('lazy').setup({
           -- `friendly-snippets` contains a variety of premade snippets.
           --    See the README about individual language/framework/plugin snippets:
           --    https://github.com/rafamadriz/friendly-snippets
+
           {
             'rafamadriz/friendly-snippets',
             config = function()
               local ls = require 'luasnip'
 
+              -- Load VSCode-style snippets
               require('luasnip.loaders.from_vscode').lazy_load()
+
+              -- Load any LuaSnip-format snippets like tex.lua or markdown.lua
               require('luasnip.loaders.from_lua').lazy_load {
                 paths = vim.fn.stdpath 'config' .. '/lua/snippets',
               }
 
-              -- Now registering snippets to be shared across filetypes
-              local shared = require 'snippets.math_shared'
-              local filetypes = { 'tex', 'markdown', 'quarto' }
-
-              -- Build map filetype -> snippet list
-              local snippets_by_ft = {}
-              for _, ft in ipairs(filetypes) do
-                snippets_by_ft[ft] = {}
-              end
-              for _, item in pairs(shared) do
-                local snippet = item.snippet or item
-                local targets = item.filetypes or filetypes
-
-                for _, ft in ipairs(targets) do
-                  if snippets_by_ft[ft] then
-                    table.insert(snippets_by_ft[ft], snippet)
-                  end
-                end
-              end
-
-              for ft, snippets in pairs(snippets_by_ft) do
-                ls.add_snippets(ft, snippets)
-              end
+              vim.keymap.set({ 'i', 's' }, '<C-l>', function()
+                require('luasnip').change_choice(1)
+              end)
+              vim.keymap.set({ 'i', 's' }, '<C-h>', function()
+                require('luasnip').change_choice(-1)
+              end)
             end,
           },
         },
@@ -936,8 +972,8 @@ require('lazy').setup({
   { -- Highlight, edit, and navigate code
     'nvim-treesitter/nvim-treesitter',
     build = ':TSUpdate',
-    main = 'nvim-treesitter.configs', -- Sets main module to use for opts
-    -- [[ Configure Treesitter ]] See `:help nvim-treesitter`
+    lazy = false,
+    main = 'nvim-treesitter.configs',
     opts = {
       ensure_installed = { 'bash', 'c', 'diff', 'html', 'lua', 'luadoc', 'markdown', 'markdown_inline', 'query', 'vim', 'vimdoc', 'yaml', 'python' },
       -- Autoinstall languages that are not installed
@@ -951,6 +987,15 @@ require('lazy').setup({
         additional_vim_regex_highlighting = { 'ruby', 'markdown' },
       },
       indent = { enable = true, disable = { 'ruby' } },
+      incremental_selection = {
+        enable = true,
+        keymaps = {
+          init_selection = 'gnn', -- set to `false` to disable one of the mappings
+          node_incremental = 'grn',
+          scope_incremental = 'grc',
+          node_decremental = 'grm',
+        },
+      },
     },
     -- There are additional nvim-treesitter modules that you can use to interact
     -- with nvim-treesitter. You should go explore a few and see what interests you:
@@ -958,6 +1003,69 @@ require('lazy').setup({
     --    - Incremental selection: Included, see `:help nvim-treesitter-incremental-selection-mod`
     --    - Show your current context: https://github.com/nvim-treesitter/nvim-treesitter-context
     --    - Treesitter + textobjects: https://github.com/nvim-treesitter/nvim-treesitter-textobjects
+  },
+  {
+    'nvim-treesitter/nvim-treesitter-textobjects',
+    dependencies = {
+      'nvim-treesitter/nvim-treesitter',
+    },
+    init = function()
+      local config = require 'nvim-treesitter.configs'
+      config.setup {
+        textobjects = {
+          select = {
+            enable = true,
+
+            -- Automatically jump forward to textobj, similar to targets.vim
+            lookahead = true,
+
+            keymaps = {
+              -- You can use the capture groups defined in textobjects.scm
+              ['af'] = '@function.outer',
+              ['if'] = '@function.inner',
+              ['ac'] = '@class.outer',
+              ['ao'] = '@comment.outer',
+              -- You can optionally set descriptions to the mappings (used in the desc parameter of
+              -- nvim_buf_set_keymap) which plugins like which-key display
+              ['ic'] = { query = '@class.inner', desc = 'Select inner part of a class region' },
+              -- You can also use captures from other query groups like `locals.scm`
+              ['as'] = { query = '@local.scope', query_group = 'locals', desc = 'Select language scope' },
+            },
+            -- You can choose the select mode (default is charwise 'v')
+            --
+            -- Can also be a function which gets passed a table with the keys
+            -- * query_string: eg '@function.inner'
+            -- * method: eg 'v' or 'o'
+            -- and should return the mode ('v', 'V', or '<c-v>') or a table
+            -- mapping query_strings to modes.
+            selection_modes = {
+              ['@parameter.outer'] = 'v', -- charwise
+              ['@function.outer'] = 'V', -- linewise
+              ['@class.outer'] = '<c-v>', -- blockwise
+            },
+            -- If you set this to `true` (default is `false`) then any textobject is
+            -- extended to include preceding or succeeding whitespace. Succeeding
+            -- whitespace has priority in order to act similarly to eg the built-in
+            -- `ap`.
+            --
+            -- Can also be a function which gets passed a table with the keys
+            -- * query_string: eg '@function.inner'
+            -- * selection_mode: eg 'v'
+            -- and should return true or false
+            include_surrounding_whitespace = true,
+          },
+          swap = {
+            enable = true,
+            swap_next = {
+              ['<leader>a'] = { query = '@parameter.inner', desc = 'Swap with next parameter' },
+            },
+            swap_previous = {
+              ['<leader>A'] = '@parameter.inner',
+            },
+          },
+        },
+      }
+    end,
   },
 
   -- The following comments only work if you have downloaded the kickstart repo, not just copy pasted the
