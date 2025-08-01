@@ -1,0 +1,70 @@
+local function set_math_mappings()
+  local mappings = {
+    ['~0'] = '\\emptyset',
+    ['~2'] = '\\sqrt',
+    ['~6'] = '\\partial',
+    ['~8'] = '\\infty',
+    ['~='] = '\\equiv',
+    ['~\\'] = '\\setminus',
+    ['~.'] = '\\cdot',
+    ['~*'] = '\\times',
+    ['~<'] = '\\langle',
+    ['~>'] = '\\rangle',
+    ['~+'] = '\\dagger',
+    ['~A'] = '\\forall',
+    ['~B'] = '\\boldsymbol',
+    ['~E'] = '\\exists',
+    ['~N'] = '\\nabla',
+    ['~jj'] = '\\downarrow',
+    ['~jJ'] = '\\Downarrow',
+    ['~jk'] = '\\uparrow',
+    ['~jK'] = '\\Uparrow',
+    ['~jh'] = '\\leftarrow',
+    ['~jH'] = '\\Leftarrow',
+    ['~jl'] = '\\rightarrow',
+    ['~jL'] = '\\Rightarrow',
+    ['~a'] = '\\alpha',
+    ['~b'] = '\\beta',
+    ['~c'] = '\\chi',
+    ['~d'] = '\\delta',
+    ['~e'] = '\\epsilon',
+    ['~f'] = '\\phi',
+    ['~g'] = '\\gamma',
+    ['~h'] = '\\eta',
+    ['~i'] = '\\iota',
+    ['~k'] = '\\kappa',
+    ['~l'] = '\\lambda',
+    ['~m'] = '\\mu',
+    ['~n'] = '\\nu',
+    ['~p'] = '\\pi',
+    ['~q'] = '\\theta',
+    ['~r'] = '\\rho',
+    ['~s'] = '\\sigma',
+    ['~t'] = '\\tau',
+    ['~y'] = '\\psi',
+    ['~u'] = '\\upsilon',
+    ['~w'] = '\\omega',
+    ['~z'] = '\\zeta',
+    ['~x'] = '\\xi',
+    ['~D'] = '\\Delta',
+    ['~F'] = '\\Phi',
+    ['~G'] = '\\Gamma',
+    ['~L'] = '\\Lambda',
+    ['~P'] = '\\Pi',
+    ['~Q'] = '\\Theta',
+    ['~S'] = '\\Sigma',
+    ['~U'] = '\\Upsilon',
+    ['~W'] = '\\Omega',
+    ['~X'] = '\\Xi',
+    ['~Y'] = '\\Psi',
+  }
+
+  for lhs, rhs in pairs(mappings) do
+    vim.keymap.set('i', lhs, function()
+      local in_math = vim.fn['vimtex#syntax#in_mathzone']() == 1
+      return in_math and rhs or lhs
+    end, { expr = true, noremap = true, buffer = true })
+  end
+end
+
+return set_math_mappings

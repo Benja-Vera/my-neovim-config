@@ -4,6 +4,7 @@ local t = ls.text_node
 local i = ls.insert_node
 local f = ls.function_node
 local c = ls.choice_node
+local sn = ls.snippet_node
 local fmt = require('luasnip.extras.fmt').fmt
 local rep = require('luasnip.extras').rep
 
@@ -169,7 +170,7 @@ M = {
 
   -- K
   s({ trig = 'KK', wordTrig = true, snippetType = 'autosnippet', condition = in_mathzone }, {
-    t '\\mathcal{K}',
+    t '\\mathbb{K}',
   }),
 
   -- L
@@ -322,11 +323,16 @@ for op, stx in pairs(operators) do
     -- General-purpose operator
     s({ trig = op, condition = in_mathzone }, {
       t(stx .. '_{'),
-      i(1, { 'i=1' }), -- index
-      t '}^{',
-      i(2, { 'n' }), -- upper limit
-      t '} ',
-      i(3), -- body
+      i(1, 'i=1'),
+      t '}',
+      c(2, {
+        -- With upper limit
+        sn(nil, { t '^{', i(1, 'n'), t '}' }),
+        -- No upper limit
+        t '',
+      }),
+      t ' ',
+      i(3), -- main expression
     })
   )
 end

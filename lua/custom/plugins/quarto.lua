@@ -13,6 +13,14 @@ return {
           languages = { 'python', 'julia' },
         },
       }
+
+      -- Only load when editing quarto files
+      vim.api.nvim_create_autocmd('FileType', {
+        pattern = 'quarto',
+        callback = function()
+          require 'mappings.quarto-math-mappings'()
+        end,
+      })
     end,
   },
 }
