@@ -1021,10 +1021,16 @@ require('lazy').setup({
 
             keymaps = {
               -- You can use the capture groups defined in textobjects.scm
+              ['aa'] = '@parameter.outer',
+              ['ia'] = '@parameter.inner',
               ['af'] = '@function.outer',
               ['if'] = '@function.inner',
               ['ac'] = '@class.outer',
               ['ao'] = '@comment.outer',
+              ['ii'] = '@conditional.inner',
+              ['ai'] = '@conditional.outer',
+              ['il'] = '@loop.inner',
+              ['al'] = '@loop.outer',
               -- You can optionally set descriptions to the mappings (used in the desc parameter of
               -- nvim_buf_set_keymap) which plugins like which-key display
               ['ic'] = { query = '@class.inner', desc = 'Select inner part of a class region' },
