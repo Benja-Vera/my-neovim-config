@@ -15,6 +15,20 @@ end
 
 M = {
   -- ENVIRONMENTS
+  -- bracket matrix
+  s({ trig = 'BMAT', snippetType = 'autosnippet', condition = in_mathzone }, {
+    t { '\\begin{bmatrix}', '' },
+    i(1),
+    t { '', '\\end{bmatrix}' },
+  }),
+
+  -- parentheses matrix
+  s({ trig = 'PMAT', snippetType = 'autosnippet', condition = in_mathzone }, {
+    t { '\\begin{pmatrix}', '' },
+    i(1),
+    t { '', '\\end{pmatrix}' },
+  }),
+
   -- numbered align
   s({ trig = 'BAL', snippetType = 'autosnippet', condition = in_mathzone }, {
     t { '\\begin{align}', '' },
