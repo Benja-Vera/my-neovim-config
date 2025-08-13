@@ -128,6 +128,57 @@ M = {
     t '\\}',
   }),
 
+  -- High-priority: ([a-zA-Z])bar -> \overline{<letter>}
+  s({
+    trig = '([a-zA-Z])bar',
+    regTrig = true,
+    snippetType = 'autosnippet',
+    priority = 100,
+    condition = in_mathzone,
+  }, {
+    f(function(_, snip)
+      return '\\overline{' .. snip.captures[1] .. '}'
+    end, {}),
+  }),
+
+  -- Lower-priority: bar -> \overline{<cursor>}
+  s({
+    trig = 'bar',
+    snippetType = 'autosnippet',
+    priority = 10,
+    condition = in_mathzone,
+  }, {
+    t '\\overline{',
+    i(1),
+    t '}',
+    i(0),
+  }),
+
+  -- same with \hat{}
+  s({
+    trig = '([a-zA-Z])hat',
+    regTrig = true,
+    snippetType = 'autosnippet',
+    priority = 100,
+    condition = in_mathzone,
+  }, {
+    f(function(_, snip)
+      return '\\hat{' .. snip.captures[1] .. '}'
+    end, {}),
+  }),
+
+  s({
+    trig = 'hat',
+    snippetType = 'autosnippet',
+    priority = 10,
+    condition = in_mathzone,
+  }, {
+    t '\\hat{',
+    i(1),
+    t '}',
+    i(0),
+  }),
+
   -- A L P H A B E T
   -- generic mathcal
   s({ trig = 'CAL', wordTrig = true, snippetType = 'autosnippet', condition = in_mathzone }, {
