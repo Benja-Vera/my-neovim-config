@@ -179,6 +179,56 @@ M = {
     i(0),
   }),
 
+  -- same with \mathbf{}
+  s({
+    trig = '([a-zA-Z])bf',
+    regTrig = true,
+    snippetType = 'autosnippet',
+    priority = 100,
+    condition = in_mathzone,
+  }, {
+    f(function(_, snip)
+      return '\\mathbf{' .. snip.captures[1] .. '}'
+    end, {}),
+  }),
+
+  s({
+    trig = 'bf',
+    snippetType = 'autosnippet',
+    priority = 10,
+    condition = in_mathzone,
+  }, {
+    t '\\mathbf{',
+    i(1),
+    t '}',
+    i(0),
+  }),
+
+  -- same with \tilde{}
+  s({
+    trig = '([a-zA-Z])til',
+    regTrig = true,
+    snippetType = 'autosnippet',
+    priority = 100,
+    condition = in_mathzone,
+  }, {
+    f(function(_, snip)
+      return '\\tilde{' .. snip.captures[1] .. '}'
+    end, {}),
+  }),
+
+  s({
+    trig = 'til',
+    snippetType = 'autosnippet',
+    priority = 10,
+    condition = in_mathzone,
+  }, {
+    t '\\tilde{',
+    i(1),
+    t '}',
+    i(0),
+  }),
+
   -- A L P H A B E T
   -- generic mathcal
   s({ trig = 'CAL', wordTrig = true, snippetType = 'autosnippet', condition = in_mathzone }, {
