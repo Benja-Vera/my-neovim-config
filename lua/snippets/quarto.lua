@@ -229,6 +229,31 @@ M = {
     i(0),
   }),
 
+  -- same with \text{}
+  s({
+    trig = '([a-zA-Z])txt',
+    regTrig = true,
+    snippetType = 'autosnippet',
+    priority = 100,
+    condition = in_mathzone,
+  }, {
+    f(function(_, snip)
+      return '\\text{' .. snip.captures[1] .. '}'
+    end, {}),
+  }),
+
+  s({
+    trig = 'txt',
+    snippetType = 'autosnippet',
+    priority = 10,
+    condition = in_mathzone,
+  }, {
+    t '\\text{',
+    i(1),
+    t '}',
+    i(0),
+  }),
+
   -- A L P H A B E T
   -- generic mathcal
   s({ trig = 'CAL', wordTrig = true, snippetType = 'autosnippet', condition = in_mathzone }, {
