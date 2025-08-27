@@ -14,6 +14,51 @@ local in_mathzone = function()
 end
 
 M = {
+
+  -- Derivative: d f / d x
+  s({ trig = 'DV', snippetType = 'autosnippet', condition = in_mathzone }, {
+    t '\\frac{\\mathrm{d} ',
+    i(1, 'f'),
+    t '}{\\mathrm{d} ',
+    i(2, 'x'),
+    t '}',
+  }),
+
+  -- Partial derivative: ∂ f / ∂ x
+  s({ trig = 'PDV', snippetType = 'autosnippet', condition = in_mathzone }, {
+    t '\\frac{\\partial ',
+    i(1, 'f'),
+    t '}{\\partial ',
+    i(2, 'x'),
+    t '}',
+  }),
+
+  -- Higher order derivative: d^n f / d x^n
+  s({ trig = 'DVN', snippetType = 'autosnippet', condition = in_mathzone }, {
+    t '\\frac{\\mathrm{d}^{',
+    i(1, 'n'),
+    t '} ',
+    i(2, 'f'),
+    t '}{\\mathrm{d} ',
+    i(3, 'x'),
+    t '^{',
+    rep(1),
+    t '}}',
+  }),
+
+  -- Higher order partial derivative: ∂^n f / ∂ x^n
+  s({ trig = 'PDVN', snippetType = 'autosnippet', condition = in_mathzone }, {
+    t '\\frac{\\partial^{',
+    i(1, 'n'),
+    t '} ',
+    i(2, 'f'),
+    t '}{\\partial ',
+    i(3, 'x'),
+    t '^{',
+    rep(1),
+    t '}}',
+  }),
+
   -- ENVIRONMENTS
   -- bracket matrix
   s({ trig = 'BMAT', snippetType = 'autosnippet', condition = in_mathzone }, {
@@ -27,6 +72,13 @@ M = {
     t { '\\begin{pmatrix}', '' },
     i(1),
     t { '', '\\end{pmatrix}' },
+  }),
+
+  -- determinant matrix
+  s({ trig = 'VMAT', snippetType = 'autosnippet', condition = in_mathzone }, {
+    t { '\\begin{vmatrix}', '' },
+    i(1),
+    t { '', '\\end{vmatrix}' },
   }),
 
   -- numbered align
@@ -106,9 +158,9 @@ M = {
     )
   ),
   -- custom symbols
-  -- "->" -> \to
+  -- "->" -> \mapsto
   s({ trig = '->', wordTrig = true, snippetType = 'autosnippet', condition = in_mathzone }, {
-    t '\\to',
+    t '\\mapsto',
   }),
 
   -- oo -> \infty
@@ -119,6 +171,11 @@ M = {
   -- cc -> \subseteq
   s({ trig = 'cc', snippetType = 'autosnippet', condition = in_mathzone }, {
     t '\\subseteq',
+  }),
+
+  -- ... -> \dots
+  s({ trig = '...', snippetType = 'autosnippet', condition = in_mathzone }, {
+    t '\\dots',
   }),
 
   -- SET -> \{|\}
