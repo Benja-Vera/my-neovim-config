@@ -101,6 +101,7 @@ return {
             t '\\sum_{e \\in K_n}',
           }),
         })
+        print 'Electrical market snippets loaded sucessfully'
       end, { desc = 'Load electrical market snippets' })
     end,
   },
