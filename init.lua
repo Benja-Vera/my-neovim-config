@@ -839,6 +839,11 @@ require('lazy').setup({
       },
       'folke/lazydev.nvim',
       'erooke/blink-cmp-latex',
+      {
+        'jmbuhr/cmp-pandoc-references',
+        dev = false,
+        ft = { 'quarto', 'markdown', 'rmarkdown' },
+      },
     },
     --- @module 'blink.cmp'
     --- @type blink.cmp.Config
@@ -884,9 +889,14 @@ require('lazy').setup({
       },
 
       sources = {
-        default = { 'lsp', 'path', 'snippets', 'lazydev', 'omni' },
+        default = { 'lsp', 'path', 'snippets', 'references', 'lazydev', 'omni' },
         providers = {
           lazydev = { module = 'lazydev.integrations.blink', score_offset = 100 },
+          references = {
+            name = 'pandoc_references',
+            module = 'cmp-pandoc-references.blink',
+            score_offset = 2,
+          },
         },
       },
 
