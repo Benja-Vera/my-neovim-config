@@ -22,9 +22,6 @@ return {
         end,
       })
 
-      -- build a path relative to your nvim config
-      local snippet_path = vim.fn.stdpath 'config' .. '/lua/snippets/electrical-market.lua'
-
       vim.keymap.set('n', '<leader>qsm', function()
         local ls = require 'luasnip'
         local s = ls.snippet
@@ -103,6 +100,28 @@ return {
         })
         print 'Electrical market snippets loaded sucessfully'
       end, { desc = 'Load electrical market snippets' })
+
+      vim.keymap.set('n', '<leader>qsd', function()
+        local ls = require 'luasnip'
+        local s = ls.snippet
+        local t = ls.text_node
+        local i = ls.insert_node
+
+        -- Math context check using vimtex
+        local in_mathzone = function()
+          return vim.fn['vimtex#syntax#in_mathzone']() == 1
+        end
+
+        ls.add_snippets('quarto', {
+          s({ trig = 'ee', snippetType = 'autosnippet', condition = in_mathzone }, {
+            t 'e^{',
+            i(1),
+            t '}',
+            i(0),
+          }),
+        })
+        print 'Differential equations snippets loaded sucessfully'
+      end, { desc = 'Load differential equations snippets' })
     end,
   },
 }
