@@ -14,6 +14,52 @@ local in_mathzone = function()
 end
 
 M = {
+  s({
+    trig = 'solucion',
+  }, {
+    t {
+      '::: {.callout collapse=true}',
+      '## Solución',
+      '',
+    },
+    i(0),
+    t {
+      '',
+      ':::',
+    },
+  }),
+
+  -- Hoja de ruta
+  s({
+    trig = 'hoja-de-ruta',
+  }, {
+    t {
+      '::: {.callout-tip}',
+      '## Hoja de ruta',
+      '',
+    },
+    i(0),
+    t {
+      '',
+      ':::',
+    },
+  }),
+
+  -- Conclusión
+  s({
+    trig = 'conclusión',
+  }, {
+    t {
+      '::: {.callout-tip icon=false}',
+      '## Conclusión',
+      '',
+    },
+    i(0),
+    t {
+      '',
+      ':::',
+    },
+  }),
 
   -- Derivative: d f / d x
   s({
@@ -195,19 +241,18 @@ M = {
     {}
     :::
 
-    ::: {{#sol-{}}}
+    ::: {{.callout collapse=true}}
+    ## Solución
     {}
     :::
-  ]],
+    ]],
       {
-        i(1, 'label'), -- shared label
+        i(1, 'label'), -- label only for the exercise
         c(2, {
           fmt('## {}\n', i(1, 'Exercise Title')), -- optional title
           t '', -- no title
         }),
         i(3, 'Problem body'),
-        -- solution block uses the same label again
-        rep(1),
         i(4, 'Solution body'),
       }
     )
@@ -255,7 +300,7 @@ M = {
     t '\\dots',
   }),
 
-  -- SET -> \{|\}
+  -- SET -> \{ ... \}
   s({
     trig = 'SET',
     snippetType = 'autosnippet',
@@ -263,8 +308,22 @@ M = {
     show_condition = in_mathzone,
   }, {
     t '\\{',
-    i(0),
+    i(1),
     t '\\}',
+    i(0),
+  }),
+
+  -- GEN -> \langle #1 \rangle #2
+  s({
+    trig = 'GEN',
+    snippetType = 'autosnippet',
+    condition = in_mathzone,
+    show_condition = in_mathzone,
+  }, {
+    t '\\langle ',
+    i(1),
+    t ' \\rangle ',
+    i(0),
   }),
 
   -- High-priority: ([a-zA-Z])bar -> \overline{<letter>}
@@ -691,7 +750,7 @@ M = {
   }),
 
   -- display math
-  s({ trig = 'dm', wordTrig = false, snippetType = 'autosnippet' }, {
+  s({ trig = 'dm', wordTrig = true, snippetType = 'autosnippet' }, {
     t { '$$', '\t' },
     i(1),
     t { '', '$$' },

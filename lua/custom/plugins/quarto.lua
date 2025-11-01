@@ -113,11 +113,16 @@ return {
         end
 
         ls.add_snippets('quarto', {
+          -- ee -> e^{|}
           s({ trig = 'ee', snippetType = 'autosnippet', condition = in_mathzone }, {
             t 'e^{',
             i(1),
             t '}',
             i(0),
+          }),
+          -- dd -> \mathrm{d}
+          s({ trig = 'dd', snippetType = 'autosnippet', condition = in_mathzone }, {
+            t '\\mathrm{d}',
           }),
         })
         print 'Differential equations snippets loaded sucessfully'
