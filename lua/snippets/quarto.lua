@@ -14,6 +14,54 @@ local in_mathzone = function()
 end
 
 M = {
+  -- BLOCKS
+  -- definition
+  s(
+    'def',
+    fmt(
+      [[
+    ::: {{#def-{}}}
+    {}
+    {}
+    :::
+  ]],
+      {
+        i(1, 'label'),
+        c(2, {
+          fmt('## {}\n', i(1, 'name')), -- Option: name line
+          t '', -- Option: no name line
+        }),
+        i(3, 'body'),
+      }
+    )
+  ),
+  -- problem + solution
+  s(
+    'exr',
+    fmt(
+      [[
+    ::: {{#exr-{}}}
+    {}
+    {}
+    :::
+
+    ::: {{.callout collapse=true}}
+    ## Solución
+    {}
+    :::
+    ]],
+      {
+        i(1, 'label'), -- label only for the exercise
+        c(2, {
+          fmt('## {}\n', i(1, 'Exercise Title')), -- optional title
+          t '', -- no title
+        }),
+        i(3, 'Problem body'),
+        i(4, 'Solution body'),
+      }
+    )
+  ),
+  -- solution
   s({
     trig = 'solucion',
   }, {
@@ -28,7 +76,6 @@ M = {
       ':::',
     },
   }),
-
   -- Hoja de ruta
   s({
     trig = 'hoja-de-ruta',
@@ -44,7 +91,6 @@ M = {
       ':::',
     },
   }),
-
   -- Conclusión
   s({
     trig = 'conclusión',
@@ -61,6 +107,7 @@ M = {
     },
   }),
 
+  -- DIFFERENTIAL OPERATORS
   -- Derivative: d f / d x
   s({
     trig = 'DV',
@@ -210,63 +257,27 @@ M = {
     t { '', '\\end{cases}' },
   }),
 
-  -- BLOCKS
-  -- definition
-  s(
-    'def',
-    fmt(
-      [[
-    ::: {{#def-{}}}
-    {}
-    {}
-    :::
-  ]],
-      {
-        i(1, 'label'),
-        c(2, {
-          fmt('## {}\n', i(1, 'name')), -- Option: name line
-          t '', -- Option: no name line
-        }),
-        i(3, 'body'),
-      }
-    )
-  ),
-  -- problem + solution
-  s(
-    'exr',
-    fmt(
-      [[
-    ::: {{#exr-{}}}
-    {}
-    {}
-    :::
-
-    ::: {{.callout collapse=true}}
-    ## Solución
-    {}
-    :::
-    ]],
-      {
-        i(1, 'label'), -- label only for the exercise
-        c(2, {
-          fmt('## {}\n', i(1, 'Exercise Title')), -- optional title
-          t '', -- no title
-        }),
-        i(3, 'Problem body'),
-        i(4, 'Solution body'),
-      }
-    )
-  ),
   -- custom symbols
   -- "->" -> \mapsto
+  -- s({
+  --   trig = '->',
+  --   wordTrig = true,
+  --   snippetType = 'autosnippet',
+  --   condition = in_mathzone,
+  --   show_condition = in_mathzone,
+  -- }, {
+  --   t '\\mapsto',
+  -- }),
+
+  -- "->>" -> \twoheadrightarrow
   s({
-    trig = '->',
+    trig = '->>',
     wordTrig = true,
     snippetType = 'autosnippet',
     condition = in_mathzone,
     show_condition = in_mathzone,
   }, {
-    t '\\mapsto',
+    t '\\twoheadrightarrow',
   }),
 
   -- oo -> \infty
@@ -324,6 +335,43 @@ M = {
     i(1),
     t ' \\rangle ',
     i(0),
+  }),
+
+  -- LEFT RIGHT EXPRESSIONS
+  s({
+    trig = '\\leftp',
+    snippetType = 'autosnippet',
+    condition = in_mathzone,
+    show_condition = in_mathzone,
+    wordTrig = false,
+  }, {
+    t '\\left(',
+    i(1),
+    t '\\right)',
+  }),
+
+  s({
+    trig = '\\leftb',
+    snippetType = 'autosnippet',
+    condition = in_mathzone,
+    show_condition = in_mathzone,
+    wordTrig = false,
+  }, {
+    t '\\left[',
+    i(1),
+    t '\\right]',
+  }),
+
+  s({
+    trig = '\\leftv',
+    snippetType = 'autosnippet',
+    condition = in_mathzone,
+    show_condition = in_mathzone,
+    wordTrig = false,
+  }, {
+    t '\\left|',
+    i(1),
+    t '\\right|',
   }),
 
   -- High-priority: ([a-zA-Z])bar -> \overline{<letter>}
@@ -460,6 +508,20 @@ M = {
     i(1),
     t '}',
     i(0),
+  }),
+
+  -- sub -> _{}
+  s({
+    trig = 'sub',
+    wordTrig = false,
+    snippetType = 'autosnippet',
+    condition = in_mathzone,
+    show_condition = in_mathzone,
+  }, {
+    t '_{',
+    i(1),
+    t '}',
+    filetype = {},
   }),
 
   -- A L P H A B E T
@@ -639,7 +701,7 @@ M = {
     condition = in_mathzone,
     show_condition = in_mathzone,
   }, {
-    t '\\mathcal{P}',
+    t '\\mathbb{P}',
   }),
 
   -- Q
@@ -739,6 +801,19 @@ M = {
     show_condition = in_mathzone,
   }, {
     t '\\mathbb{Z}',
+  }),
+
+  -- ee -> e^{|}
+  s({ trig = 'ee', snippetType = 'autosnippet', condition = in_mathzone }, {
+    t 'e^{',
+    i(1),
+    t '}',
+    i(0),
+  }),
+
+  -- dd -> \mathrm{d}
+  s({ trig = 'dd', snippetType = 'autosnippet', condition = in_mathzone }, {
+    t '\\mathrm{d}',
   }),
 
   -- MATH ENVIRONMENTS
