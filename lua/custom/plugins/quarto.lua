@@ -100,33 +100,6 @@ return {
         })
         print 'Electrical market snippets loaded sucessfully'
       end, { desc = 'Load electrical market snippets' })
-
-      vim.keymap.set('n', '<leader>qsd', function()
-        local ls = require 'luasnip'
-        local s = ls.snippet
-        local t = ls.text_node
-        local i = ls.insert_node
-
-        -- Math context check using vimtex
-        local in_mathzone = function()
-          return vim.fn['vimtex#syntax#in_mathzone']() == 1
-        end
-
-        ls.add_snippets('quarto', {
-          -- ee -> e^{|}
-          s({ trig = 'ee', snippetType = 'autosnippet', condition = in_mathzone }, {
-            t 'e^{',
-            i(1),
-            t '}',
-            i(0),
-          }),
-          -- dd -> \mathrm{d}
-          s({ trig = 'dd', snippetType = 'autosnippet', condition = in_mathzone }, {
-            t '\\mathrm{d}',
-          }),
-        })
-        print 'Differential equations snippets loaded sucessfully'
-      end, { desc = 'Load differential equations snippets' })
     end,
   },
 }
