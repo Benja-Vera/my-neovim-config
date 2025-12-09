@@ -374,6 +374,18 @@ M = {
     t '\\right|',
   }),
 
+  s({
+    trig = '\\leftc',
+    snippetType = 'autosnippet',
+    condition = in_mathzone,
+    show_condition = in_mathzone,
+    wordTrig = false,
+  }, {
+    t '\\left\\{',
+    i(1),
+    t '\\right\\}',
+  }),
+
   -- High-priority: ([a-zA-Z])bar -> \overline{<letter>}
   s({
     trig = '([a-zA-Z])bar',

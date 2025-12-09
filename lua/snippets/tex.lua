@@ -321,7 +321,7 @@ M = {
   }),
 
   -- display math
-  s({ trig = 'dm', wordTrig = false, snippetType = 'autosnippet' }, {
+  s({ trig = 'dm', wordTrig = true, snippetType = 'autosnippet' }, {
     t { '\\[', '\t' },
     i(1),
     t { '', '\\]' },
