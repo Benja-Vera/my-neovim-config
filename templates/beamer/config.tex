@@ -1,0 +1,205 @@
+\usetheme{CambridgeUS}
+\usecolortheme{beaver}
+
+\setbeamertemplate{navigation symbols}{}
+
+% Block title
+\setbeamercolor{block title}{bg=red!70!black, fg=white}
+
+% Block body
+\setbeamercolor{block body}{bg=red!10, fg=black}
+
+% Example blocks
+\setbeamercolor{block title example}{bg=green!60!black, fg=white}
+\setbeamercolor{block body example}{bg=green!10, fg=black}
+
+% Alert blocks (remarks, warnings)
+\setbeamercolor{block title alerted}{bg=orange!80!black, fg=white}
+\setbeamercolor{block body alerted}{bg=orange!15, fg=black}
+
+% Alphabet
+\newcommand{\A}{\mathcal{A}}
+\newcommand{\B}{\mathcal{B}}
+\newcommand{\C}{\mathcal{C}}
+\newcommand{\D}{\mathcal{D}}
+\newcommand{\E}{\mathbb{E}}
+\newcommand{\F}{\mathcal{F}}
+\newcommand{\G}{\mathcal{G}}
+\renewcommand{\H}{\mathcal{H}}
+\newcommand{\I}{\mathcal{I}}
+\newcommand{\K}{\mathcal{K}}
+\renewcommand{\L}{\mathcal{L}}
+\newcommand{\M}{\mathcal{M}}
+\newcommand{\N}{\mathbb{N}}
+\renewcommand{\O}{\mathcal{O}}
+\renewcommand{\P}{\mathcal{P}}
+\newcommand{\Q}{\mathcal{Q}}
+\newcommand{\R}{\mathbb{R}}
+\renewcommand{\S}{\mathcal{S}}
+\newcommand{\T}{\mathcal{T}}
+\newcommand{\U}{\mathcal{U}}
+\newcommand{\W}{\mathcal{W}}
+\newcommand{\X}{\mathcal{X}}
+\newcommand{\Y}{\mathcal{Y}}
+\newcommand{\Z}{\mathbb{Z}}
+
+% Amsthm format
+\newtheoremstyle{bfnote}%
+{}{}%
+{\itshape}{}%
+{\bfseries}{.}%
+{ }%
+{\thmname{#1}\thmnumber{ #2}\thmnote{ (#3)}}
+
+\theoremstyle{bfnote}
+\newtheorem{proposition}[theorem]{Proposición}
+
+\theoremstyle{remark}
+\newtheorem{remark}{Remark}[theorem]
+
+\theoremstyle{plain}
+\newtheorem{assumption}{Supuesto}
+
+% Operators
+\DeclareMathOperator{\sgn}{sgn}
+\DeclareMathOperator{\sen}{sen}
+\DeclareMathOperator{\tg}{tg}
+\DeclareMathOperator{\rg}{rg}
+\DeclareMathOperator*{\argmin}{argmin}
+\DeclareMathOperator{\lin}{lin}
+\DeclareMathOperator{\Span}{span}
+
+\renewcommand{\emptyset}{\varnothing}
+
+% NOTATION MACROS
+\newcommand{\kktiso}{(KKT-ISO) }
+\newcommand{\one}[1]{\mathbf{1}_{#1}}
+% Indices, sets and totals
+\newcommand{\nodeset}{N}
+\newcommand{\nodenumber}{N}
+\newcommand{\node}{n}
+
+\newcommand{\edgeset}{E}
+\newcommand{\edgenumber}{E}
+\newcommand{\edge}{e}
+
+\newcommand{\techset}{T}
+\newcommand{\technumber}{T}
+\newcommand{\tech}{t}
+
+\newcommand{\zeronodeset}{\nodeset \techset_0}
+\newcommand{\maxnodeset}{\nodeset \techset_{\overline{\productionletter}}}
+\newcommand{\partialnodeset}{\widetilde{\nodeset \techset}}
+\newcommand{\partialnodes}{\nodeset_{0, \overline{\productionletter}}}
+
+% Spaces
+\newcommand{\bidspace}{\A}
+\newcommand{\agentbidspace}{\bidspace_\node}
+\newcommand{\productionspace}{\Q}
+\newcommand{\flowspace}{\F}
+\newcommand{\isospace}{\Y}
+\newcommand{\followerspace}{\X}
+
+% Letters
+\newcommand{\productionletter}{q}
+\newcommand{\nodalproductionletter}{Q}
+\newcommand{\bidletter}{\alpha}
+\newcommand{\flowletter}{f}
+\newcommand{\resistanceletter}{r}
+\newcommand{\priceletter}{\lambda}
+\newcommand{\taxletter}{\zeta}
+\newcommand{\kktcapacityletter}{\mu}
+\newcommand{\kktflowletter}{\beta}
+\newcommand{\isocostletter}{c}
+\newcommand{\pollutionfactorletter}{z}
+\newcommand{\pollutioncostletter}{\Lambda}
+\newcommand{\demandletter}{d}
+\newcommand{\pollutionlimitletter}{L}
+\newcommand{\neighboursetletter}{K}
+\newcommand{\othernodeletter}{m}
+\newcommand{\othernode}{\othernodeletter_\edge}
+\newcommand{\constraintfunctionletter}{g}
+\newcommand{\isoletter}{y}
+\newcommand{\followerletter}{x}
+\newcommand{\agentcostletter}{c}
+\newcommand{\equalitymultiplierletter}{\xi}
+\newcommand{\inequalitymultiplierletter}{\eta}
+\newcommand{\followermultiplier}{\theta}
+
+% ISO problem data
+\newcommand{\pollutionlimit}{\overline{\pollutionlimitletter}}
+\NewDocumentCommand{\demand}{O{\node}}{\demandletter_{#1}}
+\NewDocumentCommand{\pollutionfactor}{O{\node} O{\tech}}{\pollutionfactorletter_{#1, #2}}
+\NewDocumentCommand{\OTpollutionfactor}{O{\node}}{\pollutionfactorletter_{#1}}
+\NewDocumentCommand{\pollutioncost}{O{\tech}}{\pollutioncostletter_{#1}}
+\newcommand{\OTpollutioncost}{\pollutioncostletter}
+\NewDocumentCommand{\resistance}{O{\edge}}{\resistanceletter_{#1}}
+\NewDocumentCommand{\maximumflow}{O{\edge}}{\overline{\flowletter}_{#1}}
+\NewDocumentCommand{\minimumflow}{O{\edge}}{\underline{\flowletter}_{#1}}
+\NewDocumentCommand{\maximumcapacity}{O{\node} O{\tech}}{\overline{\productionletter}_{#1, #2}}
+\NewDocumentCommand{\OTmaximumcapacity}{O{\node}}{\overline{\productionletter}_{#1}}
+\NewDocumentCommand{\neighbourset}{O{\node}}{\neighboursetletter_{#1}}
+\NewDocumentCommand{\isocost}{O{\node} O{\tech}}{\isocostletter_{#1, #2}}
+\NewDocumentCommand{\OTisocost}{O{\node}}{\isocostletter_{#1}}
+\NewDocumentCommand{\balanceconstraint}{O{\node}}{\constraintfunctionletter^{\text{B}}_{#1}}
+\newcommand{\pollutionconstraint}{\constraintfunctionletter^{\text{P}}}
+\NewDocumentCommand{\capacityconstraint}{O{\node} O{\tech}}{\constraintfunctionletter^{\text{C}}_{#1, #2}}
+\NewDocumentCommand{\capacityupperconstraint}{O{\node} O{\tech}}{\constraintfunctionletter^{\text{CU}}_{#1, #2}}
+\NewDocumentCommand{\capacitylowerconstraint}{O{\node} O{\tech}}{\constraintfunctionletter^{\text{CL}}_{#1, #2}}
+\newcommand{\isoobjectivefunction}{\constraintfunctionletter^{\text{ISO}}}
+\newcommand{\activeupperset}{\text{NT}^{\text{CU}}}
+\newcommand{\activelowerset}{\text{NT}^{\text{CL}}}
+
+\newcommand{\pollutionfactorvector}{\mathbf{\pollutionfactorletter}}
+\newcommand{\pollutioncostvector}{\boldsymbol{\pollutioncostletter}}
+\newcommand{\isocostvector}{\mathbf{\isocostletter}}
+\newcommand{\maximumcapacityvector}{\overline{\productionvector}}
+
+
+% ISO decision variables
+\NewDocumentCommand{\production}{O{\node} O{\tech}}{\productionletter_{#1, #2}}
+\NewDocumentCommand{\OTproduction}{O{\node}}{\productionletter_{#1}}
+\NewDocumentCommand{\flow}{O{\edge}}{\flowletter_{#1}}
+\NewDocumentCommand{\nodalproduction}{O{\node}}{\nodalproductionletter_{#1}}
+
+\newcommand{\productionvector}{\mathbf{\productionletter}}
+\newcommand{\flowvector}{\mathbf{\flowletter}}
+\newcommand{\isovector}{\mathbf{\isoletter}}
+\newcommand{\followervector}{\mathbf{\followerletter}}
+\newcommand{\followermultipliervector}{\boldsymbol{\followermultiplier}}
+
+% Agent problem data
+\NewDocumentCommand{\truecost}{O{\node} O{\tech}}{\hat{\bidletter}_{#1, #2}}
+\NewDocumentCommand{\OTtruecost}{O{\node}}{\hat{\bidletter}_{#1}}
+\NewDocumentCommand{\maximumbid}{O{\node} O{\tech}}{\overline{\bidletter}_{#1, #2}}
+\NewDocumentCommand{\OTmaximumbid}{O{\node}}{\overline{\bideletter}_{#1}}
+
+\newcommand{\truecostvector}{\hat{\boldsymbol{\bidletter}}}
+\newcommand{\maximumbidvector}{\overline{\boldsymbol{\bidletter}}}
+\NewDocumentCommand{\agentcost}{O{\node}}{\agentcostletter_{#1}}
+
+% Agent decision variables
+\NewDocumentCommand{\bid}{O{\node} O{\tech}}{\bidletter_{#1, #2}}
+\NewDocumentCommand{\OTbid}{O{\node}}{\bidletter_{#1}}
+\newcommand{\bidvector}{\boldsymbol{\bidletter}}
+\NewDocumentCommand{\nodalbidvector}{O{\node}}{(\bid[#1][\tech])_{\tech}}
+
+% KKT
+\newcommand{\tax}{\taxletter}
+\NewDocumentCommand{\price}{O{\node}}{\priceletter_{#1}}
+\NewDocumentCommand{\kktcapacityupper}{O{\node} O{\tech}}{\overline{\kktcapacityletter}_{#1, #2}}
+\NewDocumentCommand{\OTkktcapacityupper}{O{\node}}{\overline{\kktcapacityletter}_{#1}}
+\NewDocumentCommand{\kktcapacitylower}{O{\node} O{\tech}}{\kktcapacityletter_{#1, #2}}
+\NewDocumentCommand{\OTkktcapacitylower}{O{\node}}{\kktcapacityletter_{#1}}
+\NewDocumentCommand{\kktflowupper}{O{\edge}}{\overline{\kktflowletter}_{#1}}
+\NewDocumentCommand{\kktflowlower}{O{\edge}}{\kktflowletter_{#1}}
+
+\newcommand{\pricevector}{\boldsymbol{\priceletter}}
+\newcommand{\kktcapacityuppervector}{\overline{\boldsymbol{\kktcapacityletter}}}
+\newcommand{\kktcapacitylowervector}{\boldsymbol{\kktcapacityletter}}
+\newcommand{\kktflowuppervector}{\overline{\boldsymbol{\kktflowletter}}}
+\newcommand{\kktflowlowervector}{\boldsymbol{\kktflowletter}}
+\newcommand{\equalitymultiplier}{\boldsymbol{\equalitymultiplierletter}}
+\newcommand{\inequalitymultiplier}{\boldsymbol{\inequalitymultiplierletter}}
+
+\bibliography{references.bib}

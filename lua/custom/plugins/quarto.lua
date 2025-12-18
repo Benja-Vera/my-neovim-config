@@ -83,6 +83,11 @@ return {
             t '\\lambda_n',
           }),
 
+          -- xx -> x_{n, t}
+          s({ trig = 'xx', snippetType = 'autosnippet', condition = in_mathzone }, {
+            t 'x_{n, t}',
+          }),
+
           -- sumnt -> \sum_{n, t}
           s({ trig = 'sumnt', snippetType = 'autosnippet', condition = in_mathzone }, {
             t '\\sum_{n, t}',
@@ -96,6 +101,16 @@ return {
           -- sume -> \sum_{e \\in K_n}
           s({ trig = 'sume', snippetType = 'autosnippet', condition = in_mathzone }, {
             t '\\sum_{e \\in K_n}',
+          }),
+
+          -- NTCU -> \text{NT}^\text{CU}(\mathbf{q})
+          s({ trig = 'NTCU', condition = in_mathzone }, {
+            t '\\text{NT}^\\text{CU}(\\mathbf{q})',
+          }),
+
+          -- NTCL -> \text{NT}^\text{CL}(\mathbf{q})
+          s({ trig = 'NTCL', condition = in_mathzone }, {
+            t '\\text{NT}^\\text{CL}(\\mathbf{q})',
           }),
         })
         print 'Electrical market snippets loaded sucessfully'
