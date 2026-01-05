@@ -146,7 +146,47 @@ vim.api.nvim_create_autocmd('TextYankPost', {
 vim.api.nvim_create_autocmd('FileType', {
   pattern = { 'markdown', 'text', 'tex', 'quarto' },
   callback = function(args)
+    -- Extract filetype
     local ft = vim.bo[args.buf].filetype
+    local ls = require 'luasnip'
+
+    -- If quarto, define qp and qsm commands and add math mappings
+    if ft == 'quarto' then
+      vim.keymap.set('n', '<leader>qp', ':QuartoPreview<CR>', {
+        buffer = args.buf,
+        noremap = true,
+        silent = true,
+        desc = 'Preview Quarto document',
+      })
+
+      vim.keymap.set('n', '<leader>qsm', function()
+        ls.add_snippets('quarto', require 'snippets.specific.electrical-market-raw')
+        print 'Electrical market snippets loaded sucessfully'
+      end, { desc = 'Load electrical market snippets' })
+
+      require 'mappings.quarto-math-mappings'()
+    end
+
+    if ft == 'tex' then
+      vim.api.nvim_create_user_command('LatexTemplate', function(opts)
+        local arg = vim.split(opts.args, ' ')
+        vim.fn.system {
+          vim.fn.expand '~/.config/nvim/scripts/latex-template.sh',
+          arg[1],
+          arg[2],
+        }
+      end, { nargs = '+' })
+
+      vim.keymap.set('v', '<leader>cg', function()
+        vim.cmd 'normal! c\\textcolor{ForestGreen}{}'
+        vim.cmd 'normal! P'
+      end, { desc = 'Color selection green' })
+
+      vim.keymap.set('n', '<leader>qsm', function()
+        ls.add_snippets('tex', require 'snippets.specific.electrical-market-macro')
+        print 'Electrical market snippets loaded sucessfully'
+      end, { desc = 'Load electrical market snippets' })
+    end
 
     vim.cmd.colorscheme 'gruvbox'
     vim.opt_local.spell = true
@@ -159,15 +199,6 @@ vim.api.nvim_create_autocmd('FileType', {
     vim.keymap.set('v', 'k', 'gk', opts)
     vim.keymap.set('s', 'j', 'j', opts)
     vim.keymap.set('s', 'k', 'k', opts)
-
-    if ft == 'quarto' then
-      vim.keymap.set('n', '<leader>qp', ':QuartoPreview<CR>', {
-        buffer = args.buf,
-        noremap = true,
-        silent = true,
-        desc = 'Preview Quarto document',
-      })
-    end
 
     local function toggle_surrounding_delimiters()
       local row, col = unpack(vim.api.nvim_win_get_cursor(0))

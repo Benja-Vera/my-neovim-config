@@ -4,9 +4,11 @@ local t = ls.text_node
 local i = ls.insert_node
 local f = ls.function_node
 local c = ls.choice_node
+
 local sn = ls.snippet_node
 local fmt = require('luasnip.extras.fmt').fmt
 local rep = require('luasnip.extras').rep
+local postfix = require('luasnip.extras.postfix').postfix
 
 -- Math context check using vimtex
 local in_mathzone = function()
@@ -291,9 +293,9 @@ M = {
     t '\\infty',
   }),
 
-  -- cc -> \subseteq
+  -- c= -> \subseteq
   s({
-    trig = 'cc',
+    trig = 'c=',
     snippetType = 'autosnippet',
     condition = in_mathzone,
     show_condition = in_mathzone,
@@ -386,133 +388,45 @@ M = {
     t '\\right\\}',
   }),
 
-  -- High-priority: ([a-zA-Z])bar -> \overline{<letter>}
-  s({
-    trig = '([a-zA-Z])bar',
-    regTrig = true,
-    snippetType = 'autosnippet',
-    priority = 100,
-    condition = in_mathzone,
-    show_condition = in_mathzone,
-  }, {
-    f(function(_, snip)
-      return '\\overline{' .. snip.captures[1] .. '}'
+  -- \alphabar -> \overline{\alpha}
+  postfix({ trig = 'bar', match_pattern = [[[\\%w%.%_%-%"%']+$]], condition = in_mathzone, snippetType = 'autosnippet', dscr = 'postfix bar' }, {
+    f(function(_, parent)
+      return '\\overline{' .. parent.snippet.env.POSTFIX_MATCH .. '}'
     end, {}),
   }),
 
-  -- Lower-priority: bar -> \overline{<cursor>}
-  s({
-    trig = 'bar',
-    snippetType = 'autosnippet',
-    priority = 10,
-    condition = in_mathzone,
-    show_condition = in_mathzone,
-  }, {
-    t '\\overline{',
-    i(1),
-    t '}',
-    i(0),
-  }),
-
-  -- same with \hat{}
-  s({
-    trig = '([a-zA-Z])hat',
-    regTrig = true,
-    snippetType = 'autosnippet',
-    priority = 100,
-    condition = in_mathzone,
-    show_condition = in_mathzone,
-  }, {
-    f(function(_, snip)
-      return '\\hat{' .. snip.captures[1] .. '}'
+  -- \alphabf -> \boldsymbol{\alpha}
+  postfix({ trig = 'bf', match_pattern = [[[\\%w%.%_%-%"%']+$]], condition = in_mathzone, snippetType = 'autosnippet', dscr = 'postfix bold' }, {
+    f(function(_, parent)
+      return '\\boldsymbol{' .. parent.snippet.env.POSTFIX_MATCH .. '}'
     end, {}),
   }),
 
-  s({
-    trig = 'hat',
-    snippetType = 'autosnippet',
-    priority = 10,
-    condition = in_mathzone,
-    show_condition = in_mathzone,
-  }, {
-    t '\\hat{',
-    i(1),
-    t '}',
-    i(0),
-  }),
-
-  -- same with \mathbf{}
-  s({
-    trig = '([a-zA-Z])bf',
-    regTrig = true,
-    snippetType = 'autosnippet',
-    priority = 100,
-    condition = in_mathzone,
-    show_condition = in_mathzone,
-  }, {
-    f(function(_, snip)
-      return '\\mathbf{' .. snip.captures[1] .. '}'
+  -- \alphahat -> \hat{\alpha}
+  postfix({ trig = 'hat', match_pattern = [[[\\%w%.%_%-%"%']+$]], condition = in_mathzone, snippetType = 'autosnippet', dscr = 'postfix hat' }, {
+    f(function(_, parent)
+      return '\\hat{' .. parent.snippet.env.POSTFIX_MATCH .. '}'
     end, {}),
   }),
 
-  s({
-    trig = 'bf',
-    snippetType = 'autosnippet',
-    priority = 10,
-    condition = in_mathzone,
-    show_condition = in_mathzone,
-  }, {
-    t '\\mathbf{',
-    i(1),
-    t '}',
-    i(0),
-  }),
-
-  -- same with \tilde{}
-  s({
-    trig = '([a-zA-Z])til',
-    regTrig = true,
-    snippetType = 'autosnippet',
-    priority = 100,
-    condition = in_mathzone,
-    show_condition = in_mathzone,
-  }, {
-    f(function(_, snip)
-      return '\\tilde{' .. snip.captures[1] .. '}'
+  -- \alphavec -> \vec{\alpha}
+  postfix({ trig = 'vec', match_pattern = [[[\\%w%.%_%-%"%']+$]], condition = in_mathzone, snippetType = 'autosnippet', dscr = 'postfix vector' }, {
+    f(function(_, parent)
+      return '\\vec{' .. parent.snippet.env.POSTFIX_MATCH .. '}'
     end, {}),
   }),
 
-  s({
-    trig = 'til',
-    snippetType = 'autosnippet',
-    priority = 10,
-    condition = in_mathzone,
-    show_condition = in_mathzone,
-  }, {
-    t '\\tilde{',
-    i(1),
-    t '}',
-    i(0),
-  }),
-
-  -- same with \text{}
-  s({
-    trig = '([a-zA-Z])txt',
-    regTrig = true,
-    snippetType = 'autosnippet',
-    priority = 100,
-    condition = in_mathzone,
-    show_condition = in_mathzone,
-  }, {
-    f(function(_, snip)
-      return '\\text{' .. snip.captures[1] .. '}'
+  -- \alphatil -> \tilde{\alpha}
+  postfix({ trig = 'til', match_pattern = [[[\\%w%.%_%-%"%']+$]], condition = in_mathzone, snippetType = 'autosnippet', dscr = 'postfix tilde' }, {
+    f(function(_, parent)
+      return '\\tilde{' .. parent.snippet.env.POSTFIX_MATCH .. '}'
     end, {}),
   }),
 
+  -- txt -> \text{|}
   s({
     trig = 'txt',
     snippetType = 'autosnippet',
-    priority = 10,
     condition = in_mathzone,
     show_condition = in_mathzone,
   }, {
@@ -874,6 +788,15 @@ M = {
       return '\\frac{' .. snip.captures[1] .. '}{'
     end, {}),
     i(1),
+    t '}',
+  }),
+
+  -- Fractions: (something)./ -> \frac{something}{|}
+  postfix({ trig = './', match_pattern = '%b()', snippetType = 'autosnippet', condition = in_mathzone }, {
+    f(function(_, parent)
+      return '\\frac{' .. parent.snippet.env.POSTFIX_MATCH:sub(2, -2) .. '}{'
+    end, {}),
+    i(1, 'denominator'),
     t '}',
   }),
 }
