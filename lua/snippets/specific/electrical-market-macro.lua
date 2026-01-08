@@ -9,9 +9,19 @@ local in_mathzone = function()
 end
 
 return {
-  -- tt -> \tax
+  -- nn -> \node
+  s({ trig = 'nn', snippetType = 'autosnippet', condition = in_mathzone }, {
+    t '\\node',
+  }),
+
+  -- ee -> \edge
+  s({ trig = 'ee', snippetType = 'autosnippet', condition = in_mathzone }, {
+    t '\\edge',
+  }),
+
+  -- tt -> \tech
   s({ trig = 'tt', snippetType = 'autosnippet', condition = in_mathzone }, {
-    t '\\tax',
+    t '\\tech',
   }),
 
   -- aa -> \bid
@@ -95,13 +105,13 @@ return {
   }),
 
   -- NTCU -> \text{NT}^\text{CU}(\boldsymbol{q})
-  s({ trig = 'NTCU', condition = in_mathzone }, {
-    t '\\text{NT}^\\text{CU}(\\boldsymbol{q})',
+  s({ trig = 'NTCU', condition = in_mathzone, snippetType = 'autosnippet' }, {
+    t '\\activeupperset (\\productionvector)',
   }),
 
   -- NTCL -> \text{NT}^\text{CL}(\boldsymbol{q})
-  s({ trig = 'NTCL', condition = in_mathzone }, {
-    t '\\text{NT}^\\text{CL}(\\boldsymbol{q})',
+  s({ trig = 'NTCL', condition = in_mathzone, snippetType = 'autosnippet' }, {
+    t '\\activelowerset (\\productionvector)',
   }),
 
   -- \bid.p -> \bid[\node_0][\tech_0] (postfix)
@@ -112,6 +122,7 @@ return {
     snippetType = 'autosnippet',
     condition = in_mathzone,
     desc = 'add parameters',
+    hidden = true,
   }, {
     f(function(_, snip)
       return snip.captures[1] .. '['
@@ -130,6 +141,7 @@ return {
     snippetType = 'autosnippet',
     condition = in_mathzone,
     desc = 'add parameters',
+    hidden = true,
   }, {
     f(function(_, snip)
       return snip.captures[1] .. '['
@@ -146,6 +158,7 @@ return {
     snippetType = 'autosnippet',
     condition = in_mathzone,
     desc = 'add parameters',
+    hidden = true,
   }, {
     f(function(_, snip)
       return snip.captures[1] .. '['
@@ -160,9 +173,25 @@ return {
     snippetType = 'autosnippet',
     condition = in_mathzone,
     desc = 'add parameters',
+    hidden = true,
   }, {
     t '\\pollutioncost[',
     i(1, '\\tech_0'),
     t ']',
+  }),
+
+  -- \bid.v -> \bidvector (postfix)
+  s({
+    trig = '(\\\\bid|\\\\production|\\\\flow|\\\\deviation).v',
+    regTrig = true,
+    trigEngine = 'ecma',
+    snippetType = 'autosnippet',
+    condition = in_mathzone,
+    desc = 'add parameters',
+    hidden = true,
+  }, {
+    f(function(_, snip)
+      return snip.captures[1] .. 'vector'
+    end),
   }),
 }

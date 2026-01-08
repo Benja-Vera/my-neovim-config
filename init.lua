@@ -197,7 +197,7 @@ vim.api.nvim_create_autocmd('FileType', {
       ls.add_snippets('tex', require 'snippets.general.fractions')
     end
 
-    vim.cmd.colorscheme 'gruvbox'
+    vim.cmd.colorscheme 'kanagawa-dragon'
     vim.opt_local.spell = true
     vim.opt_local.spelllang = { 'en', 'es' }
 
@@ -987,6 +987,10 @@ require('lazy').setup({
     end,
   },
   { 'morhetz/gruvbox' },
+  { 'sainnhe/everforest' },
+  { 'navarasu/onedark.nvim' },
+  { 'rose-pine/neovim' },
+  { 'rebelot/kanagawa.nvim' },
 
   -- Highlight todo, notes, etc in comments
   { 'folke/todo-comments.nvim', event = 'VimEnter', dependencies = { 'nvim-lua/plenary.nvim' }, opts = { signs = false } },
