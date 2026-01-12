@@ -16,7 +16,7 @@ vim.g.have_nerd_font = false
 vim.o.number = true
 -- You can also add relative line numbers, to help with jumping.
 --  Experiment for yourself to see if you like it!
--- vim.o.relativenumber = true
+vim.o.relativenumber = true
 
 -- Enable mouse mode, can be useful for resizing splits for example!
 vim.o.mouse = 'a'
@@ -165,6 +165,7 @@ vim.api.nvim_create_autocmd('FileType', {
       end, { desc = 'Load electrical market snippets' })
 
       ls.add_snippets('quarto', require 'snippets.general.alphabet')
+      ls.add_snippets('quarto', require 'snippets.general.common')
       ls.add_snippets('quarto', require 'snippets.general.operators')
       ls.add_snippets('quarto', require 'snippets.general.postfix')
       ls.add_snippets('quarto', require 'snippets.general.fractions')
@@ -192,6 +193,7 @@ vim.api.nvim_create_autocmd('FileType', {
       end, { desc = 'Load electrical market snippets' })
 
       ls.add_snippets('tex', require 'snippets.general.alphabet')
+      ls.add_snippets('tex', require 'snippets.general.common')
       ls.add_snippets('tex', require 'snippets.general.operators')
       ls.add_snippets('tex', require 'snippets.general.postfix')
       ls.add_snippets('tex', require 'snippets.general.fractions')
