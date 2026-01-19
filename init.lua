@@ -167,6 +167,7 @@ vim.api.nvim_create_autocmd('FileType', {
       ls.add_snippets('quarto', require 'snippets.general.alphabet')
       ls.add_snippets('quarto', require 'snippets.general.operators')
       ls.add_snippets('quarto', require 'snippets.general.postfix')
+      ls.add_snippets('quarto', require 'snippets.general.common')
       ls.add_snippets('quarto', require 'snippets.general.fractions')
       require 'mappings.quarto-math-mappings'()
     end
@@ -194,6 +195,7 @@ vim.api.nvim_create_autocmd('FileType', {
       ls.add_snippets('tex', require 'snippets.general.alphabet')
       ls.add_snippets('tex', require 'snippets.general.operators')
       ls.add_snippets('tex', require 'snippets.general.postfix')
+      ls.add_snippets('tex', require 'snippets.general.common')
       ls.add_snippets('tex', require 'snippets.general.fractions')
     end
 
