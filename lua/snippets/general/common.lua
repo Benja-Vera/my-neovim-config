@@ -12,7 +12,7 @@ return {
   -- SET -> \{|\}
   s({ trig = 'SET', snippetType = 'autosnippet', condition = in_mathzone }, {
     t '\\{',
-    i(0),
+    i(1),
     t '\\}',
   }),
 
@@ -81,6 +81,20 @@ return {
     i(1),
     t '}',
     i(0),
+  }),
+
+  -- sub -> _{}
+  s({
+    trig = 'td',
+    wordTrig = false,
+    snippetType = 'autosnippet',
+    condition = in_mathzone,
+    show_condition = in_mathzone,
+  }, {
+    t '^{',
+    i(1),
+    t '}',
+    filetype = {},
   }),
 
   -- sub -> _{}
