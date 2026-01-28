@@ -1,5 +1,7 @@
 local ls = require 'luasnip'
 local f = ls.function_node
+local t = ls.text_node
+local i = ls.insert_node
 
 local postfix = require('luasnip.extras.postfix').postfix
 
@@ -42,5 +44,14 @@ return {
     f(function(_, parent)
       return '\\tilde{' .. parent.snippet.env.POSTFIX_MATCH .. '}'
     end, {}),
+  }),
+
+  -- Underbrace: (something)./ -> \underbrace{something}_{|}
+  postfix({ trig = '._', match_pattern = '%b()', snippetType = 'autosnippet', condition = in_mathzone }, {
+    f(function(_, parent)
+      return '\\underbrace{' .. parent.snippet.env.POSTFIX_MATCH:sub(2, -2) .. '}_{'
+    end, {}),
+    i(1, 'annotation'),
+    t '}',
   }),
 }

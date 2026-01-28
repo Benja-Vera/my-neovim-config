@@ -16,17 +16,16 @@ return {
     t '\\}',
   }),
 
-  -- custom symbols
-  -- "->" -> \mapsto
-  -- s({
-  --   trig = '->',
-  --   wordTrig = true,
-  --   snippetType = 'autosnippet',
-  --   condition = in_mathzone,
-  --   show_condition = in_mathzone,
-  -- }, {
-  --   t '\\mapsto',
-  -- }),
+  -- "=>" -> \implies
+  s({
+    trig = '=>',
+    wordTrig = true,
+    snippetType = 'autosnippet',
+    condition = in_mathzone,
+    show_condition = in_mathzone,
+  }, {
+    t '\\implies',
+  }),
 
   -- "->>" -> \twoheadrightarrow
   s({
@@ -109,6 +108,17 @@ return {
     i(1),
     t '}',
     filetype = {},
+  }),
+
+  -- comp -> ^{c}
+  s({
+    trig = 'comp',
+    snippetType = 'autosnippet',
+    condition = in_mathzone,
+    show_condition = in_mathzone,
+    wordTrig = false,
+  }, {
+    t '^{c}',
   }),
 
   -- ee -> e^{|}
