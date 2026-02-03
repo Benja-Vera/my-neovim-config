@@ -12,21 +12,20 @@ return {
   -- SET -> \{|\}
   s({ trig = 'SET', snippetType = 'autosnippet', condition = in_mathzone }, {
     t '\\{',
-    i(0),
+    i(1),
     t '\\}',
   }),
 
-  -- custom symbols
-  -- "->" -> \mapsto
-  -- s({
-  --   trig = '->',
-  --   wordTrig = true,
-  --   snippetType = 'autosnippet',
-  --   condition = in_mathzone,
-  --   show_condition = in_mathzone,
-  -- }, {
-  --   t '\\mapsto',
-  -- }),
+  -- "=>" -> \implies
+  s({
+    trig = '=>',
+    wordTrig = true,
+    snippetType = 'autosnippet',
+    condition = in_mathzone,
+    show_condition = in_mathzone,
+  }, {
+    t '\\implies',
+  }),
 
   -- "->>" -> \twoheadrightarrow
   s({
@@ -85,6 +84,20 @@ return {
 
   -- sub -> _{}
   s({
+    trig = 'td',
+    wordTrig = false,
+    snippetType = 'autosnippet',
+    condition = in_mathzone,
+    show_condition = in_mathzone,
+  }, {
+    t '^{',
+    i(1),
+    t '}',
+    filetype = {},
+  }),
+
+  -- sub -> _{}
+  s({
     trig = 'sub',
     wordTrig = false,
     snippetType = 'autosnippet',
@@ -95,6 +108,17 @@ return {
     i(1),
     t '}',
     filetype = {},
+  }),
+
+  -- comp -> ^{c}
+  s({
+    trig = 'comp',
+    snippetType = 'autosnippet',
+    condition = in_mathzone,
+    show_condition = in_mathzone,
+    wordTrig = false,
+  }, {
+    t '^{c}',
   }),
 
   -- ee -> e^{|}
