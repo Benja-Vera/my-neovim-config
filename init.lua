@@ -121,11 +121,11 @@ vim.keymap.set('n', '<C-j>', '<C-w><C-j>', { desc = 'Move focus to the lower win
 vim.keymap.set('n', '<C-k>', '<C-w><C-k>', { desc = 'Move focus to the upper window' })
 
 -- Latex template command
-vim.api.nvim_create_user_command('LatexTemplate', function(opts)
+vim.api.nvim_create_user_command('Template', function(opts)
   local arg = vim.split(opts.args, ' ')
   local out = vim.fn.system {
     'python',
-    vim.fn.stdpath 'config' .. '/scripts/latextemplate.py',
+    vim.fn.stdpath 'config' .. '/scripts/template.py',
     arg[1],
     arg[2],
   }

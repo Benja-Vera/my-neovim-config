@@ -1,0 +1,21 @@
+---
+title: "Hello world"
+jupyter: python3
+format:
+  html:
+    theme: darkly
+---
+
+*by: Benja Vera*
+
+In this notebook, we will study... Here are some formulas:
+$$
+	\sum_{i=1}^n i = \frac{n(n+1)}{2}
+$$
+These formula may be implemented in the following code block
+
+```{python}
+for i in range(10):
+	print(i)
+
+```
