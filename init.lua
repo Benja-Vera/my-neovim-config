@@ -120,12 +120,19 @@ vim.keymap.set('n', '<C-l>', '<C-w><C-l>', { desc = 'Move focus to the right win
 vim.keymap.set('n', '<C-j>', '<C-w><C-j>', { desc = 'Move focus to the lower window' })
 vim.keymap.set('n', '<C-k>', '<C-w><C-k>', { desc = 'Move focus to the upper window' })
 
--- NOTE: Some terminals have colliding keymaps or are not able to send distinct keycodes
--- vim.keymap.set("n", "<C-S-h>", "<C-w>H", { desc = "Move window to the left" })
--- vim.keymap.set("n", "<C-S-l>", "<C-w>L", { desc = "Move window to the right" })
--- vim.keymap.set("n", "<C-S-j>", "<C-w>J", { desc = "Move window to the lower" })
--- vim.keymap.set("n", "<C-S-k>", "<C-w>K", { desc = "Move window to the upper" })
---
+-- Latex template command
+vim.api.nvim_create_user_command('LatexTemplate', function(opts)
+  local arg = vim.split(opts.args, ' ')
+  local out = vim.fn.system {
+    'python',
+    vim.fn.stdpath 'config' .. '/scripts/latextemplate.py',
+    arg[1],
+    arg[2],
+  }
+
+  print(out)
+end, { nargs = '+' })
+
 -- [[ Basic Autocommands ]]
 --  See `:help lua-guide-autocommands`
 
@@ -180,15 +187,6 @@ vim.api.nvim_create_autocmd('FileType', {
     end
 
     if ft == 'tex' then
-      vim.api.nvim_create_user_command('LatexTemplate', function(opts)
-        local arg = vim.split(opts.args, ' ')
-        vim.fn.system {
-          vim.fn.expand '~/.config/nvim/scripts/latex-template.sh',
-          arg[1],
-          arg[2],
-        }
-      end, { nargs = '+' })
-
       vim.keymap.set('v', '<leader>cg', function()
         vim.cmd 'normal! c\\textcolor{ForestGreen}{}'
         vim.cmd 'normal! P'
