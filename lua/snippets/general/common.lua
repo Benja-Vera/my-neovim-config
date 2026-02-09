@@ -10,7 +10,7 @@ end
 
 return {
   -- SET -> \{|\}
-  s({ trig = 'SET', snippetType = 'autosnippet', condition = in_mathzone }, {
+  s({ trig = 'SET', snippetType = 'autosnippet', condition = in_mathzone, show_condition = in_mathzone }, {
     t '\\{',
     i(1),
     t '\\}',
@@ -122,7 +122,7 @@ return {
   }),
 
   -- ee -> e^{|}
-  s({ trig = 'ee', snippetType = 'autosnippet', condition = in_mathzone }, {
+  s({ trig = 'ee', snippetType = 'autosnippet', condition = in_mathzone, show_condition = in_mathzone }, {
     t 'e^{',
     i(1),
     t '}',
@@ -130,7 +130,7 @@ return {
   }),
 
   -- dd -> \mathrm{d}
-  s({ trig = 'dd', snippetType = 'autosnippet', condition = in_mathzone }, {
+  s({ trig = 'dd', snippetType = 'autosnippet', condition = in_mathzone, show_condition = in_mathzone }, {
     t '\\mathrm{d}',
   }),
 }

@@ -277,9 +277,9 @@ M = {
     show_condition = in_mathzone,
     wordTrig = false,
   }, {
-    t '\\left(',
+    t '\\left( ',
     i(1),
-    t '\\right)',
+    t ' \\right)',
   }),
 
   s({
@@ -289,9 +289,9 @@ M = {
     show_condition = in_mathzone,
     wordTrig = false,
   }, {
-    t '\\left[',
+    t '\\left[ ',
     i(1),
-    t '\\right]',
+    t ' \\right]',
   }),
 
   s({
@@ -301,9 +301,9 @@ M = {
     show_condition = in_mathzone,
     wordTrig = false,
   }, {
-    t '\\left|',
+    t '\\left| ',
     i(1),
-    t '\\right|',
+    t ' \\right|',
   }),
 
   s({
@@ -313,9 +313,9 @@ M = {
     show_condition = in_mathzone,
     wordTrig = false,
   }, {
-    t '\\left\\{',
+    t '\\left\\{ ',
     i(1),
-    t '\\right\\}',
+    t ' \\right\\}',
   }),
 
   -- MATH ENVIRONMENTS
@@ -330,7 +330,7 @@ M = {
   s({ trig = 'dm', wordTrig = true, snippetType = 'autosnippet' }, {
     t { '$$', '\t' },
     i(1),
-    t { '', '$$' },
+    t { '', '$$', '' },
   }),
 }
 

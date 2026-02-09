@@ -21,7 +21,7 @@ M = {
   s({ trig = 'dm', wordTrig = true, snippetType = 'autosnippet' }, {
     t { '\\[', '\t' },
     i(1),
-    t { '', '\\]' },
+    t { '', '\\]', '' },
   }),
 }
 
