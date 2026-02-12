@@ -182,7 +182,7 @@ return {
 
   -- \bid.v -> \bidvector (postfix)
   s({
-    trig = '(\\\\bid|\\\\production|\\\\flow|\\\\deviation).v',
+    trig = '(\\\\bid|\\\\production|\\\\flow|\\\\deviation|\\\\price).v',
     regTrig = true,
     trigEngine = 'ecma',
     snippetType = 'autosnippet',

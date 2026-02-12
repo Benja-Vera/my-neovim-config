@@ -23,6 +23,8 @@ M = {
     {}
     {}
     :::
+
+
   ]],
       {
         i(1, 'label'),
@@ -48,6 +50,8 @@ M = {
     ## Solución
     {}
     :::
+
+
     ]],
       {
         i(1, 'label'), -- label only for the exercise
@@ -69,10 +73,12 @@ M = {
       '## Solución',
       '',
     },
-    i(0),
+    i(1),
     t {
       '',
       ':::',
+      '',
+      '',
     },
   }),
   -- Hoja de ruta
@@ -84,10 +90,12 @@ M = {
       '## Hoja de ruta',
       '',
     },
-    i(0),
+    i(1),
     t {
       '',
       ':::',
+      '',
+      '',
     },
   }),
   -- Conclusión
@@ -99,10 +107,12 @@ M = {
       '## Conclusión',
       '',
     },
-    i(0),
+    i(1),
     t {
       '',
       ':::',
+      '',
+      '',
     },
   }),
 
@@ -215,9 +225,11 @@ M = {
     condition = in_mathzone,
     show_condition = in_mathzone,
   }, {
-    t { '\\begin{align}', '' },
-    i(1),
-    t { '', '\\end{align}' },
+    t { '\\begin{align} \\label{eq:' },
+    i(1, 'label'),
+    t { '}', '' },
+    i(2, 'body'),
+    t { '', '\\end{align}', '' },
   }),
 
   -- unnumbered align
@@ -229,7 +241,19 @@ M = {
   }, {
     t { '\\begin{align*}', '' },
     i(1),
-    t { '', '\\end{align*}' },
+    t { '', '\\end{align*}', '' },
+  }),
+
+  -- array
+  s({
+    trig = 'BAR',
+    snippetType = 'autosnippet',
+    condition = in_mathzone,
+    show_condition = in_mathzone,
+  }, {
+    t { '\\begin{array}{c}', '' },
+    i(1),
+    t { '', '\\end{array}', '' },
   }),
 
   -- numbered equation
@@ -239,9 +263,14 @@ M = {
     condition = in_mathzone,
     show_condition = in_mathzone,
   }, {
-    t { '\\begin{equation}', '' },
-    i(1),
-    t { '', '\\end{equation}' },
+    t { '\\begin{equation}, \\label{eq:' },
+    i(1, 'label'),
+    t { '}', '' },
+    i(2, 'body'),
+    t '. \\tag{',
+    i(3, 'TAG'),
+    t '}',
+    t { '', '\\end{equation}', '' },
   }),
 
   -- cases

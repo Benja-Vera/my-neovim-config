@@ -57,6 +57,7 @@ local function set_math_mappings()
     ['~W'] = '\\Omega',
     ['~X'] = '\\Xi',
     ['~Y'] = '\\Psi',
+    ['~T'] = '^\\top',
   }
 
   for lhs, rhs in pairs(mappings) do
