@@ -885,10 +885,14 @@ require('lazy').setup({
               }
 
               vim.keymap.set({ 'i', 's' }, '<C-l>', function()
-                require('luasnip').change_choice(1)
+                if ls.choice_active() then
+                  ls.change_choice(1)
+                end
               end)
               vim.keymap.set({ 'i', 's' }, '<C-h>', function()
-                require('luasnip').change_choice(-1)
+                if ls.choice_active() then
+                  ls.change_choice(-1)
+                end
               end)
             end,
           },

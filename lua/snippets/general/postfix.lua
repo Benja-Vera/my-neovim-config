@@ -59,20 +59,6 @@ return {
     end, {}),
   }),
 
-  -- \alphavec -> \vec{\alpha}
-  postfix({
-    trig = 'vec',
-    match_pattern = [[[\\%w%.%_%-%"%']+$]],
-    condition = in_mathzone,
-    show_condition = no_show,
-    snippetType = 'autosnippet',
-    dscr = 'postfix vector',
-  }, {
-    f(function(_, parent)
-      return '\\vec{' .. parent.snippet.env.POSTFIX_MATCH .. '}'
-    end, {}),
-  }),
-
   -- \alphatil -> \tilde{\alpha}
   postfix({
     trig = 'til',
