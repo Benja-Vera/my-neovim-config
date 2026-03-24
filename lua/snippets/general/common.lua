@@ -133,4 +133,16 @@ return {
   s({ trig = 'dd', snippetType = 'autosnippet', condition = in_mathzone, show_condition = in_mathzone }, {
     t '\\mathrm{d}',
   }),
+
+  -- LIM -> \lim_{#1 \to #2} #3 #0
+  s({ trig = 'LIM', snippetType = 'autosnippet', condition = in_mathzone, show_condition = in_mathzone }, {
+    t '\\lim_{',
+    i(1),
+    t ' \\to ',
+    i(2),
+    t '} ',
+    i(3),
+    t ' ',
+    i(0),
+  }),
 }

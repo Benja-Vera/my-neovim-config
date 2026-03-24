@@ -43,11 +43,13 @@ M = {
       [[
     ::: {{#exr-{}}}
     {}
+
     {}
     :::
 
     ::: {{.callout collapse=true}}
     ## Solución
+
     {}
     :::
 
@@ -89,6 +91,7 @@ M = {
       '::: {.callout-tip}',
       '## Hoja de ruta',
       '',
+      '',
     },
     i(1),
     t {
@@ -105,6 +108,7 @@ M = {
     t {
       '::: {.callout-tip icon=false}',
       '## Conclusión',
+      '',
       '',
     },
     i(1),
@@ -294,6 +298,21 @@ M = {
   }, {
     t '\\langle ',
     i(1),
+    t ' \\rangle ',
+    i(0),
+  }),
+
+  -- DPROD -> \langle #1, #2 \rangle #3
+  s({
+    trig = 'DPROD',
+    snippetType = 'autosnippet',
+    condition = in_mathzone,
+    show_condition = in_mathzone,
+  }, {
+    t '\\langle ',
+    i(1),
+    t ', ',
+    i(2),
     t ' \\rangle ',
     i(0),
   }),

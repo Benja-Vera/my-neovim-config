@@ -133,6 +133,18 @@ vim.api.nvim_create_user_command('Template', function(opts)
   print(out)
 end, { nargs = '+' })
 
+-- Fix the last spelling mistake and jump back to where you were
+vim.keymap.set('i', '<C-f>', '<c-g>u<Esc>[s1z=`^a<c-g>u', { desc = 'Fix last misspelled word' })
+
+local function set_transparent_bg()
+  local groups = { 'Normal', 'NormalNC', 'NonText', 'SignColumn', 'EndOfBuffer' }
+  for _, group in ipairs(groups) do
+    vim.api.nvim_set_hl(0, group, { bg = 'NONE', ctermbg = 'NONE' })
+  end
+end
+
+vim.api.nvim_create_user_command('Transparent', set_transparent_bg, { desc = 'Make background transparent' })
+
 -- [[ Basic Autocommands ]]
 --  See `:help lua-guide-autocommands`
 
