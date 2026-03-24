@@ -207,7 +207,7 @@ vim.api.nvim_create_autocmd('FileType', {
 
     vim.cmd.colorscheme 'kanagawa-dragon'
     vim.opt_local.spell = true
-    vim.opt_local.spelllang = { 'en', 'es' }
+    vim.opt_local.spelllang = { 'en' }
 
     local opts = { noremap = true, buffer = args.buf }
     vim.keymap.set('n', 'j', 'gj', opts)
@@ -739,7 +739,6 @@ require('lazy').setup({
       local servers = {
         -- clangd = {},
         -- texlab = {},
-        pyright = {},
         -- ltex_plus = {
         --   settings = {
         --     enabled = false,
@@ -1059,10 +1058,14 @@ require('lazy').setup({
           local buf, filetype = args.buf, args.match
 
           local language = vim.treesitter.language.get_lang(filetype)
-          if not language then return end
+          if not language then
+            return
+          end
 
           -- check if parser exists and load it
-          if not vim.treesitter.language.add(language) then return end
+          if not vim.treesitter.language.add(language) then
+            return
+          end
           -- enables syntax highlighting and other treesitter features
           vim.treesitter.start(buf, language)
 
