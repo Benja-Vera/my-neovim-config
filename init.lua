@@ -321,8 +321,9 @@ rtp:prepend(lazypath)
 -- NOTE: Here is where you install your plugins.
 require('lazy').setup({
   -- NOTE: Plugins can be added with a link (or for a github repo: 'owner/repo' link).
-  'NMAC427/guess-indent.nvim', -- Detect tabstop and shiftwidth automatically
-  'mhinz/vim-startify',
+
+  -- 'NMAC427/guess-indent.nvim', -- Detect tabstop and shiftwidth automatically
+  'mhinz/vim-startify', -- The fancy start screen for Vim
 
   -- NOTE: Plugins can also be added by using a table,
   -- with the first argument being the link and the following
@@ -888,7 +889,9 @@ require('lazy').setup({
               local ls = require 'luasnip'
 
               -- Load VSCode-style snippets
-              require('luasnip.loaders.from_vscode').lazy_load()
+              require('luasnip.loaders.from_vscode').lazy_load {
+                exclude = 'tex',
+              }
 
               -- Load any LuaSnip-format snippets like tex.lua or markdown.lua
               require('luasnip.loaders.from_lua').lazy_load {
@@ -963,6 +966,9 @@ require('lazy').setup({
 
       sources = {
         default = { 'lsp', 'path', 'snippets', 'references', 'lazydev', 'omni' },
+        per_filetype = {
+          tex = { 'path', 'snippets', 'lazydev', 'omni' },
+        },
         providers = {
           lazydev = { module = 'lazydev.integrations.blink', score_offset = 100 },
           references = {

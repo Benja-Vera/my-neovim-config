@@ -23,6 +23,75 @@ M = {
     i(1),
     t { '', '\\]', '' },
   }),
+
+  -- THEOREM TYPE ENVIRONMENTS
+  -- definition
+  s({ trig = 'BDEF', wordTrig = true, snippetType = 'autosnippet' }, {
+    t '\\begin{definition}[',
+    i(1, 'name of the definition'),
+    t { ']', '\t' },
+    i(2, 'body'),
+    t { '', '\\end{definition}', '' },
+    i(0),
+  }),
+
+  -- proposition
+  s({ trig = 'BPROP', wordTrig = true, snippetType = 'autosnippet' }, {
+    t '\\begin{proposition}[',
+    i(1, 'name of the proposition'),
+    t { ']', '\t' },
+    i(2, 'body'),
+    t { '', '\\end{proposition}', '' },
+    i(0),
+  }),
+
+  -- lemma
+  s({ trig = 'BLEM', wordTrig = true, snippetType = 'autosnippet' }, {
+    t '\\begin{lemma}[',
+    i(1, 'name of the lemma'),
+    t { ']', '\t' },
+    i(2, 'body'),
+    t { '', '\\end{lemma}', '' },
+    i(0),
+  }),
+
+  -- theorem
+  s({ trig = 'BTHM', wordTrig = true, snippetType = 'autosnippet' }, {
+    t '\\begin{theorem}[',
+    i(1, 'name of the theorem'),
+    t { ']', '\t' },
+    i(2, 'body'),
+    t { '', '\\end{theorem}', '' },
+    i(0),
+  }),
+
+  -- example
+  s({ trig = 'BEX', wordTrig = true, snippetType = 'autosnippet' }, {
+    t '\\begin{example}[',
+    i(1, 'name of the example'),
+    t { ']', '\t' },
+    i(2, 'body'),
+    t { '', '\\end{example}', '' },
+    i(0),
+  }),
+
+  -- corollary
+  s({ trig = 'BCOR', wordTrig = true, snippetType = 'autosnippet' }, {
+    t '\\begin{corollary}[',
+    i(1, 'name of the corollary'),
+    t { ']', '\t' },
+    i(2, 'body'),
+    t { '', '\\end{corollary}', '' },
+    i(0),
+  }),
+
+  -- proof
+  s({ trig = 'BPRF', wordTrig = true, snippetType = 'autosnippet' }, {
+    t { '\\begin{proof}', '\t' },
+    i(1, 'proof body'),
+    t { '', '\\end{proof}' },
+    i(0),
+  }),
 }
 
 return M
