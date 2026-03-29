@@ -52,7 +52,7 @@ return {
     condition = in_mathzone,
     show_condition = in_mathzone,
   }, {
-    t '\\mathbb{C}',
+    t '\\mathcal{C}',
   }),
 
   -- D

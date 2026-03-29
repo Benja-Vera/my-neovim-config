@@ -11,9 +11,9 @@ end
 return {
   -- SET -> \{|\}
   s({ trig = 'SET', snippetType = 'autosnippet', condition = in_mathzone, show_condition = in_mathzone }, {
-    t '\\{',
+    t '\\{ ',
     i(1),
-    t '\\}',
+    t ' \\}',
   }),
 
   -- "=>" -> \implies
@@ -82,7 +82,7 @@ return {
     i(0),
   }),
 
-  -- sub -> _{}
+  -- td -> ^{}
   s({
     trig = 'td',
     wordTrig = false,
@@ -119,6 +119,17 @@ return {
     wordTrig = false,
   }, {
     t '^{c}',
+  }),
+
+  -- inv -> ^{-1}
+  s({
+    trig = 'inv',
+    snippetType = 'autosnippet',
+    condition = in_mathzone,
+    show_condition = in_mathzone,
+    wordTrig = false,
+  }, {
+    t '^{-1}',
   }),
 
   -- ee -> e^{|}
