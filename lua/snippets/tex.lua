@@ -14,9 +14,9 @@ M = {
     s({ trig = "newcommand", wordTrig = true }, {
         t("\\newcommand{"),
         i(1, "\\command"),
-        t("}{"),
+        t("}{\\ensuremath{"),
         i(2, "body"),
-        t("}"),
+        t("}}"),
     }),
 
     -- \NewDocumentCommand{\demand}{O{\node}}{\demandletter_{#1}}
@@ -25,9 +25,9 @@ M = {
         i(1, "\\command"),
         t("}{O{"),
         i(2, "b"),
-        t("}}{"),
+        t("}}{\\ensuremath{"),
         i(3, "a_{#1}"),
-        t("}"),
+        t("}}"),
     }),
     -- MATH ENVIRONMENTS
     -- inline math
