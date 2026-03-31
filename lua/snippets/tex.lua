@@ -9,6 +9,26 @@ local in_mathzone = function()
 end
 
 M = {
+    -- NEW COMMANDS
+    -- \newcommand
+    s({ trig = "newcommand", wordTrig = true }, {
+        t("\\newcommand{"),
+        i(1, "\\command"),
+        t("}{"),
+        i(2, "body"),
+        t("}"),
+    }),
+
+    -- \NewDocumentCommand{\demand}{O{\node}}{\demandletter_{#1}}
+    s({ trig = "newdocumentcommand", wordTrig = true }, {
+        t("\\NewDocumentCommand{"),
+        i(1, "\\command"),
+        t("}{O{"),
+        i(2, "b"),
+        t("}}{"),
+        i(3, "a_{#1}"),
+        t("}"),
+    }),
     -- MATH ENVIRONMENTS
     -- inline math
     s({ trig = "mk", wordTrig = true, snippetType = "autosnippet" }, {

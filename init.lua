@@ -192,7 +192,6 @@ vim.api.nvim_create_autocmd("FileType", {
                 desc = "Preview Quarto document",
             })
 
-            ls.add_snippets("quarto", require("snippets.general.alphabet"))
             ls.add_snippets("quarto", require("snippets.general.common"))
             ls.add_snippets("quarto", require("snippets.general.operators"))
             ls.add_snippets("quarto", require("snippets.general.postfix"))
@@ -202,7 +201,6 @@ vim.api.nvim_create_autocmd("FileType", {
         end
 
         if ft == "tex" then
-            ls.add_snippets("tex", require("snippets.general.alphabet"))
             ls.add_snippets("tex", require("snippets.general.common"))
             ls.add_snippets("tex", require("snippets.general.operators"))
             ls.add_snippets("tex", require("snippets.general.postfix"))
