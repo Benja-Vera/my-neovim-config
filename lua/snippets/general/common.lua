@@ -1,159 +1,159 @@
-local ls = require 'luasnip'
+local ls = require("luasnip")
 local s = ls.snippet
 local t = ls.text_node
 local i = ls.insert_node
 
 -- Math context check using vimtex
 local in_mathzone = function()
-  return vim.fn['vimtex#syntax#in_mathzone']() == 1
+    return vim.fn["vimtex#syntax#in_mathzone"]() == 1
 end
 
 return {
-  -- SET -> \{|\}
-  s({ trig = 'SET', snippetType = 'autosnippet', condition = in_mathzone, show_condition = in_mathzone }, {
-    t '\\{ ',
-    i(1),
-    t ' \\}',
-  }),
+    -- SET -> \{ | \}
+    s({ trig = "SET", snippetType = "autosnippet", condition = in_mathzone, show_condition = in_mathzone }, {
+        t("\\{ "),
+        i(1),
+        t(" \\}"),
+    }),
 
-  -- "=>" -> \implies
-  s({
-    trig = '=>',
-    wordTrig = true,
-    snippetType = 'autosnippet',
-    condition = in_mathzone,
-    show_condition = in_mathzone,
-  }, {
-    t '\\implies',
-  }),
+    -- "=>" -> \implies
+    s({
+        trig = "=>",
+        wordTrig = true,
+        snippetType = "autosnippet",
+        condition = in_mathzone,
+        show_condition = in_mathzone,
+    }, {
+        t("\\implies"),
+    }),
 
-  -- "->>" -> \twoheadrightarrow
-  s({
-    trig = '->>',
-    wordTrig = true,
-    snippetType = 'autosnippet',
-    condition = in_mathzone,
-    show_condition = in_mathzone,
-  }, {
-    t '\\twoheadrightarrow',
-  }),
+    -- "->>" -> \twoheadrightarrow
+    s({
+        trig = "->>",
+        wordTrig = true,
+        snippetType = "autosnippet",
+        condition = in_mathzone,
+        show_condition = in_mathzone,
+    }, {
+        t("\\twoheadrightarrow"),
+    }),
 
-  -- oo -> \infty
-  s({
-    trig = 'oo',
-    wordTrig = false,
-    snippetType = 'autosnippet',
-    condition = in_mathzone,
-    show_condition = in_mathzone,
-  }, {
-    t '\\infty',
-  }),
+    -- oo -> \infty
+    s({
+        trig = "oo",
+        wordTrig = false,
+        snippetType = "autosnippet",
+        condition = in_mathzone,
+        show_condition = in_mathzone,
+    }, {
+        t("\\infty"),
+    }),
 
-  -- c= -> \subseteq
-  s({
-    trig = 'c=',
-    snippetType = 'autosnippet',
-    condition = in_mathzone,
-    show_condition = in_mathzone,
-  }, {
-    t '\\subseteq',
-  }),
+    -- c= -> \subseteq
+    s({
+        trig = "c=",
+        snippetType = "autosnippet",
+        condition = in_mathzone,
+        show_condition = in_mathzone,
+    }, {
+        t("\\subseteq"),
+    }),
 
-  -- ... -> \dots
-  s({
-    trig = '...',
-    snippetType = 'autosnippet',
-    condition = in_mathzone,
-    show_condition = in_mathzone,
-  }, {
-    t '\\dots',
-  }),
+    -- ... -> \dots
+    s({
+        trig = "...",
+        snippetType = "autosnippet",
+        condition = in_mathzone,
+        show_condition = in_mathzone,
+    }, {
+        t("\\dots"),
+    }),
 
-  -- txt -> \text{|}
-  s({
-    trig = 'txt',
-    snippetType = 'autosnippet',
-    condition = in_mathzone,
-    show_condition = in_mathzone,
-  }, {
-    t '\\text{',
-    i(1),
-    t '}',
-    i(0),
-  }),
+    -- txt -> \text{|}
+    s({
+        trig = "txt",
+        snippetType = "autosnippet",
+        condition = in_mathzone,
+        show_condition = in_mathzone,
+    }, {
+        t("\\text{"),
+        i(1),
+        t("}"),
+        i(0),
+    }),
 
-  -- td -> ^{}
-  s({
-    trig = 'td',
-    wordTrig = false,
-    snippetType = 'autosnippet',
-    condition = in_mathzone,
-    show_condition = in_mathzone,
-  }, {
-    t '^{',
-    i(1),
-    t '}',
-    filetype = {},
-  }),
+    -- td -> ^{}
+    s({
+        trig = "td",
+        wordTrig = false,
+        snippetType = "autosnippet",
+        condition = in_mathzone,
+        show_condition = in_mathzone,
+    }, {
+        t("^{"),
+        i(1),
+        t("}"),
+        filetype = {},
+    }),
 
-  -- sub -> _{}
-  s({
-    trig = 'sub',
-    wordTrig = false,
-    snippetType = 'autosnippet',
-    condition = in_mathzone,
-    show_condition = in_mathzone,
-  }, {
-    t '_{',
-    i(1),
-    t '}',
-    filetype = {},
-  }),
+    -- sub -> _{}
+    s({
+        trig = "sub",
+        wordTrig = false,
+        snippetType = "autosnippet",
+        condition = in_mathzone,
+        show_condition = in_mathzone,
+    }, {
+        t("_{"),
+        i(1),
+        t("}"),
+        filetype = {},
+    }),
 
-  -- comp -> ^{c}
-  s({
-    trig = 'comp',
-    snippetType = 'autosnippet',
-    condition = in_mathzone,
-    show_condition = in_mathzone,
-    wordTrig = false,
-  }, {
-    t '^{c}',
-  }),
+    -- comp -> ^{c}
+    s({
+        trig = "comp",
+        snippetType = "autosnippet",
+        condition = in_mathzone,
+        show_condition = in_mathzone,
+        wordTrig = false,
+    }, {
+        t("^{c}"),
+    }),
 
-  -- inv -> ^{-1}
-  s({
-    trig = 'inv',
-    snippetType = 'autosnippet',
-    condition = in_mathzone,
-    show_condition = in_mathzone,
-    wordTrig = false,
-  }, {
-    t '^{-1}',
-  }),
+    -- inv -> ^{-1}
+    s({
+        trig = "inv",
+        snippetType = "autosnippet",
+        condition = in_mathzone,
+        show_condition = in_mathzone,
+        wordTrig = false,
+    }, {
+        t("^{-1}"),
+    }),
 
-  -- ee -> e^{|}
-  s({ trig = 'ee', snippetType = 'autosnippet', condition = in_mathzone, show_condition = in_mathzone }, {
-    t 'e^{',
-    i(1),
-    t '}',
-    i(0),
-  }),
+    -- ee -> e^{|}
+    s({ trig = "ee", snippetType = "autosnippet", condition = in_mathzone, show_condition = in_mathzone }, {
+        t("e^{"),
+        i(1),
+        t("}"),
+        i(0),
+    }),
 
-  -- dd -> \mathrm{d}
-  s({ trig = 'dd', snippetType = 'autosnippet', condition = in_mathzone, show_condition = in_mathzone }, {
-    t '\\mathrm{d}',
-  }),
+    -- dd -> \mathrm{d}
+    s({ trig = "dd", snippetType = "autosnippet", condition = in_mathzone, show_condition = in_mathzone }, {
+        t("\\mathrm{d}"),
+    }),
 
-  -- LIM -> \lim_{#1 \to #2} #3 #0
-  s({ trig = 'LIM', snippetType = 'autosnippet', condition = in_mathzone, show_condition = in_mathzone }, {
-    t '\\lim_{',
-    i(1),
-    t ' \\to ',
-    i(2),
-    t '} ',
-    i(3),
-    t ' ',
-    i(0),
-  }),
+    -- LIM -> \lim_{#1 \to #2} #3 #0
+    s({ trig = "LIM", snippetType = "autosnippet", condition = in_mathzone, show_condition = in_mathzone }, {
+        t("\\lim_{"),
+        i(1),
+        t(" \\to "),
+        i(2),
+        t("} "),
+        i(3),
+        t(" "),
+        i(0),
+    }),
 }
