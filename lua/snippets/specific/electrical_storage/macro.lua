@@ -88,6 +88,7 @@ return {
     s({ trig = "rr", snippetType = "autosnippet", condition = in_mathzone }, {
         t("\\resistance"),
         c(1, {
+            t(""),
             sn(nil, {
                 t("["),
                 i(1, "\\edge"),
@@ -100,6 +101,7 @@ return {
     s({ trig = "dd", snippetType = "autosnippet", condition = in_mathzone }, {
         t("\\demand"),
         c(1, {
+            t(""),
             sn(nil, {
                 t("["),
                 i(1, "\\node"),
@@ -115,6 +117,7 @@ return {
     s({ trig = "qs", snippetType = "autosnippet", condition = in_mathzone }, {
         t("\\productionstate"),
         c(1, {
+            t(""),
             sn(nil, {
                 t("["),
                 i(1, "\\node"),
@@ -129,11 +132,13 @@ return {
     s({ trig = "fs", snippetType = "autosnippet", condition = in_mathzone }, {
         t("\\flowstate"),
         c(1, {
+            t(""),
             sn(nil, {
                 t("["),
                 i(1, "\\edge"),
                 t("]["),
                 i(2, "\\time"),
+                t("]"),
             }),
         }),
     }),
@@ -142,6 +147,7 @@ return {
     s({ trig = "ss", snippetType = "autosnippet", condition = in_mathzone }, {
         t("\\storagestate"),
         c(1, {
+            t(""),
             sn(nil, {
                 t("["),
                 i(1, "\\node"),
@@ -157,6 +163,7 @@ return {
     s({ trig = "qr", snippetType = "autosnippet", condition = in_mathzone }, {
         t("\\productionramp"),
         c(1, {
+            t(""),
             sn(nil, {
                 t("["),
                 i(1, "\\node"),
@@ -171,6 +178,7 @@ return {
     s({ trig = "fr", snippetType = "autosnippet", condition = in_mathzone }, {
         t("\\flowramp"),
         c(1, {
+            t(""),
             sn(nil, {
                 t("["),
                 i(1, "\\edge"),
@@ -184,6 +192,7 @@ return {
     s({ trig = "sr", snippetType = "autosnippet", condition = in_mathzone }, {
         t("\\storageramp"),
         c(1, {
+            t(""),
             sn(nil, {
                 t("["),
                 i(1, "\\node"),
@@ -199,6 +208,7 @@ return {
     s({ trig = "qMs", snippetType = "autosnippet", condition = in_mathzone }, {
         t("\\productionmaxstate"),
         c(1, {
+            t(""),
             sn(nil, {
                 t("["),
                 i(1, "\\node"),
@@ -213,6 +223,7 @@ return {
     s({ trig = "fMs", snippetType = "autosnippet", condition = in_mathzone }, {
         t("\\flowmaxstate"),
         c(1, {
+            t(""),
             sn(nil, {
                 t("["),
                 i(1, "\\edge"),
@@ -225,6 +236,7 @@ return {
     s({ trig = "sMs", snippetType = "autosnippet", condition = in_mathzone }, {
         t("\\storagemaxstate"),
         c(1, {
+            t(""),
             sn(nil, {
                 t("["),
                 i(1, "\\edge"),
@@ -238,6 +250,7 @@ return {
     s({ trig = "qMr", snippetType = "autosnippet", condition = in_mathzone }, {
         t("\\productionmaxramp"),
         c(1, {
+            t(""),
             sn(nil, {
                 t("["),
                 i(1, "\\node"),
@@ -250,6 +263,7 @@ return {
     s({ trig = "qmr", snippetType = "autosnippet", condition = in_mathzone }, {
         t("\\productionminramp"),
         c(1, {
+            t(""),
             sn(nil, {
                 t("["),
                 i(1, "\\node"),
@@ -262,6 +276,7 @@ return {
     s({ trig = "fMr", snippetType = "autosnippet", condition = in_mathzone }, {
         t("\\flowmaxramp"),
         c(1, {
+            t(""),
             sn(nil, {
                 t("["),
                 i(1, "\\edge"),
@@ -274,6 +289,7 @@ return {
     s({ trig = "sMr", snippetType = "autosnippet", condition = in_mathzone }, {
         t("\\storagemaxramp"),
         c(1, {
+            t(""),
             sn(nil, {
                 t("["),
                 i(1, "\\node"),
@@ -286,6 +302,7 @@ return {
     s({ trig = "smr", snippetType = "autosnippet", condition = in_mathzone }, {
         t("\\storageminramp"),
         c(1, {
+            t(""),
             sn(nil, {
                 t("["),
                 i(1, "\\node"),

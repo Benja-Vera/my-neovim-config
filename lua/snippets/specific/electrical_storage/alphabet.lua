@@ -94,6 +94,8 @@ return {
         t("\\mathcal{I}"),
     }),
 
+    -- K not defined as in macro
+
     -- L
     s({
         trig = "LL",
