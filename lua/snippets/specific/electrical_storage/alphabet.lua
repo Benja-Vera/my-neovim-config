@@ -55,27 +55,9 @@ return {
         t("\\mathcal{C}"),
     }),
 
-    -- D
-    s({
-        trig = "DD",
-        wordTrig = true,
-        snippetType = "autosnippet",
-        condition = in_mathzone,
-        show_condition = in_mathzone,
-    }, {
-        t("\\mathcal{D}"),
-    }),
+    -- D not defined as in macro
 
-    -- E
-    s({
-        trig = "EE",
-        wordTrig = true,
-        snippetType = "autosnippet",
-        condition = in_mathzone,
-        show_condition = in_mathzone,
-    }, {
-        t("\\mathbb{E}"),
-    }),
+    -- E not defined as in macro
 
     -- F
     s({
@@ -88,16 +70,7 @@ return {
         t("\\mathcal{F}"),
     }),
 
-    -- G
-    s({
-        trig = "GG",
-        wordTrig = true,
-        snippetType = "autosnippet",
-        condition = in_mathzone,
-        show_condition = in_mathzone,
-    }, {
-        t("\\mathcal{G}"),
-    }),
+    -- G not defined as in macro
 
     -- H
     s({
@@ -119,17 +92,6 @@ return {
         show_condition = in_mathzone,
     }, {
         t("\\mathcal{I}"),
-    }),
-
-    -- K
-    s({
-        trig = "KK",
-        wordTrig = true,
-        snippetType = "autosnippet",
-        condition = in_mathzone,
-        show_condition = in_mathzone,
-    }, {
-        t("\\mathbb{K}"),
     }),
 
     -- L
@@ -154,16 +116,7 @@ return {
         t("\\mathcal{M}"),
     }),
 
-    -- N
-    s({
-        trig = "NN",
-        wordTrig = true,
-        snippetType = "autosnippet",
-        condition = in_mathzone,
-        show_condition = in_mathzone,
-    }, {
-        t("\\mathbb{N}"),
-    }),
+    -- N not defined as in macro
 
     -- O
     s({
@@ -220,16 +173,7 @@ return {
         t("\\mathcal{S}"),
     }),
 
-    -- T
-    s({
-        trig = "TT",
-        wordTrig = true,
-        snippetType = "autosnippet",
-        condition = in_mathzone,
-        show_condition = in_mathzone,
-    }, {
-        t("\\mathcal{T}"),
-    }),
+    -- T not defined as in macro
 
     -- U
     s({
