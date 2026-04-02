@@ -204,9 +204,22 @@ return {
     }),
 
     -- STATE BOUNDS
-    -- qMs: \productionmaxstate
-    s({ trig = "qMs", snippetType = "autosnippet", condition = in_mathzone }, {
-        t("\\productionmaxstate"),
+    -- dqMs: \dispatchableproductionmaxstate
+    s({ trig = "dqMs", snippetType = "autosnippet", condition = in_mathzone }, {
+        t("\\dispatchableproductionmaxstate"),
+        c(1, {
+            t(""),
+            sn(nil, {
+                t("["),
+                i(1, "\\node"),
+                t("]"),
+            }),
+        }),
+    }),
+
+    -- vqMs: \variableproductionmaxstate
+    s({ trig = "vqMs", snippetType = "autosnippet", condition = in_mathzone }, {
+        t("\\variableproductionmaxstate"),
         c(1, {
             t(""),
             sn(nil, {
