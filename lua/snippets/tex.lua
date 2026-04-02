@@ -102,7 +102,6 @@ M = {
         t({ "]", "\t" }),
         i(2, "body"),
         t({ "", "\\end{definition}", "" }),
-        i(0),
     }),
 
     -- proposition
@@ -112,7 +111,6 @@ M = {
         t({ "]", "\t" }),
         i(2, "body"),
         t({ "", "\\end{proposition}", "" }),
-        i(0),
     }),
 
     -- lemma
@@ -122,7 +120,6 @@ M = {
         t({ "]", "\t" }),
         i(2, "body"),
         t({ "", "\\end{lemma}", "" }),
-        i(0),
     }),
 
     -- theorem
@@ -132,7 +129,13 @@ M = {
         t({ "]", "\t" }),
         i(2, "body"),
         t({ "", "\\end{theorem}", "" }),
-        i(0),
+    }),
+
+    -- remark
+    s({ trig = "BRMK", wordTrig = true, snippetType = "autosnippet", condition = line_begin }, {
+        t({ "\\begin{remark}", "\t" }),
+        i(1, "body"),
+        t({ "", "\\end{remark}", "" }),
     }),
 
     -- example
@@ -142,7 +145,6 @@ M = {
         t({ "]", "\t" }),
         i(2, "body"),
         t({ "", "\\end{example}", "" }),
-        i(0),
     }),
 
     -- corollary
@@ -152,7 +154,6 @@ M = {
         t({ "]", "\t" }),
         i(2, "body"),
         t({ "", "\\end{corollary}", "" }),
-        i(0),
     }),
 
     -- proof
@@ -160,7 +161,6 @@ M = {
         t({ "\\begin{proof}", "\t" }),
         i(1, "proof body"),
         t({ "", "\\end{proof}" }),
-        i(0),
     }),
 }
 
