@@ -155,6 +155,13 @@ vim.api.nvim_create_user_command("Transparent", set_transparent_bg, { desc = "Ma
 
 -- [[ Basic Autocommands ]]
 --  See `:help lua-guide-autocommands`
+--
+vim.api.nvim_create_autocmd("FileType", {
+    pattern = { "python" },
+    callback = function()
+        vim.treesitter.start()
+    end,
+})
 
 require("custom.quarto.omnifunc")
 
@@ -1057,6 +1064,90 @@ require("lazy").setup({
         "nvim-treesitter/nvim-treesitter",
         lazy = false,
         build = ":TSUpdate",
+        branch = "main",
+        config = function()
+            local parsers = { "python" }
+            require("nvim-treesitter").install(parsers)
+        end,
+    },
+    {
+        "nvim-treesitter/nvim-treesitter-textobjects",
+        branch = "main",
+        init = function()
+            -- Disable entire built-in ftplugin mappings to avoid conflicts.
+            -- See https://github.com/neovim/neovim/tree/master/runtime/ftplugin for built-in ftplugins.
+            vim.g.no_plugin_maps = true
+
+            -- Or, disable per filetype (add as you like)
+            -- vim.g.no_python_maps = true
+            -- vim.g.no_ruby_maps = true
+            -- vim.g.no_rust_maps = true
+            -- vim.g.no_go_maps = true
+        end,
+        config = function()
+            -- configuration
+            require("nvim-treesitter-textobjects").setup({
+                select = {
+                    -- Automatically jump forward to textobj, similar to targets.vim
+                    lookahead = true,
+                    -- You can choose the select mode (default is charwise 'v')
+                    --
+                    -- Can also be a function which gets passed a table with the keys
+                    -- * query_string: eg '@function.inner'
+                    -- * method: eg 'v' or 'o'
+                    -- and should return the mode ('v', 'V', or '<c-v>') or a table
+                    -- mapping query_strings to modes.
+                    selection_modes = {
+                        ["@parameter.outer"] = "v", -- charwise
+                        ["@class.outer"] = "V", -- linewise
+                        ["@class.inner"] = "V",
+                        ["@function.outer"] = "V",
+                        ["@function.inner"] = "V",
+                        ["@loop.outer"] = "V",
+                        ["@loop.inner"] = "V",
+                        ["@conditional.outer"] = "V",
+                        ["@conditional.inner"] = "V",
+                    },
+                    -- If you set this to `true` (default is `false`) then any textobject is
+                    -- extended to include preceding or succeeding whitespace. Succeeding
+                    -- whitespace has priority in order to act similarly to eg the built-in
+                    -- `ap`.
+                    --
+                    -- Can also be a function which gets passed a table with the keys
+                    -- * query_string: eg '@function.inner'
+                    -- * selection_mode: eg 'v'
+                    -- and should return true of false
+                    include_surrounding_whitespace = false,
+                },
+            })
+
+            -- keymaps
+            -- You can use the capture groups defined in `textobjects.scm`
+            vim.keymap.set({ "x", "o" }, "af", function()
+                require("nvim-treesitter-textobjects.select").select_textobject("@function.outer", "textobjects")
+            end, { desc = "Around function" })
+            vim.keymap.set({ "x", "o" }, "if", function()
+                require("nvim-treesitter-textobjects.select").select_textobject("@function.inner", "textobjects")
+            end, { desc = "Inside function" })
+            vim.keymap.set({ "x", "o" }, "ac", function()
+                require("nvim-treesitter-textobjects.select").select_textobject("@class.outer", "textobjects")
+            end, { desc = "Around class" })
+            vim.keymap.set({ "x", "o" }, "ic", function()
+                require("nvim-treesitter-textobjects.select").select_textobject("@class.inner", "textobjects")
+            end, { desc = "Inside class" })
+            vim.keymap.set({ "x", "o" }, "ai", function()
+                require("nvim-treesitter-textobjects.select").select_textobject("@conditional.outer", "textobjects")
+            end, { desc = "Around conditional" })
+            vim.keymap.set({ "x", "o" }, "ii", function()
+                require("nvim-treesitter-textobjects.select").select_textobject("@conditional.inner", "textobjects")
+            end, { desc = "Inside conditional" })
+            vim.keymap.set({ "x", "o" }, "al", function()
+                require("nvim-treesitter-textobjects.select").select_textobject("@loop.outer", "textobjects")
+            end, { desc = "Around loop" })
+            vim.keymap.set({ "x", "o" }, "il", function()
+                require("nvim-treesitter-textobjects.select").select_textobject("@loop.inner", "textobjects")
+            end, { desc = "Inside loop" })
+        end,
     },
 
     -- The following comments only work if you have downloaded the kickstart repo, not just copy pasted the
