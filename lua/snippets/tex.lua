@@ -94,6 +94,13 @@ M = {
         t("}"),
     }),
 
+    -- monospaced
+    s({ trig = "FTT", wordTrig = true, snippetType = "autosnippet" }, {
+        t("\\texttt{"),
+        i(1),
+        t("}"),
+    }),
+
     -- THEOREM TYPE ENVIRONMENTS
     -- definition
     s({ trig = "BDEF", wordTrig = true, snippetType = "autosnippet", condition = line_begin }, {
