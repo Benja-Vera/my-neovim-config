@@ -192,7 +192,7 @@ vim.api.nvim_create_autocmd("TextYankPost", {
 })
 
 vim.api.nvim_create_autocmd("FileType", {
-    pattern = { "markdown", "text", "tex", "quarto" },
+    pattern = { "markdown", "text", "tex", "bib", "quarto" },
     callback = function(args)
         -- Extract filetype
         local ft = vim.bo[args.buf].filetype
