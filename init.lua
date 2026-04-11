@@ -1,8 +1,16 @@
+-- OS check
+local is_windows = vim.fn.has("win32") == 1
+local is_linux = vim.fn.has("unix") == 1
+
 -- Set <space> as the leader key
 -- See `:help mapleader`
 --  NOTE: Must happen before plugins are loaded (otherwise wrong leader will be used)
 vim.g.mapleader = " "
 vim.g.maplocalleader = " "
+
+if is_windows then
+    vim.g.sqlite_clib_path = "C:/Users/benja/sqlite3.dll"
+end
 
 -- Set to true if you have a Nerd Font installed and selected in the terminal
 vim.g.have_nerd_font = false
