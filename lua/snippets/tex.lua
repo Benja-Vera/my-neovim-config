@@ -1,7 +1,11 @@
 local ls = require("luasnip")
 local s = ls.snippet
+local sn = ls.snippet_node
+local d = ls.dynamic_node
 local t = ls.text_node
 local i = ls.insert_node
+local f = ls.function_node
+local fmt = require("luasnip.extras.fmt").fmt
 
 -- Math context check using vimtex
 local in_mathzone = function()
@@ -35,6 +39,98 @@ M = {
         i(3, "a_{#1}"),
         t("}}"),
     }),
+
+    -- FONT STYLE COMMANDS
+    -- bold
+    s({ trig = "FBF", snippetType = "autosnippet" }, {
+        t("\\textbf{"),
+        d(1, function(args, parent)
+            local env = parent.snippet.env
+            if #env.LS_SELECT_RAW > 0 then
+                -- If text is selected, return the selection
+                return sn(nil, {
+                    t(env.LS_SELECT_RAW),
+                })
+            else
+                -- Otherwise, provide an empty insert node
+                return sn(nil, {
+                    i(1),
+                })
+            end
+        end, {}),
+        t("}"),
+    }),
+
+    -- italic
+    s({ trig = "FIT", snippetType = "autosnippet" }, {
+        t("\\textit{"),
+        d(1, function(args, parent)
+            local env = parent.snippet.env
+            if #env.LS_SELECT_RAW > 0 then
+                -- If text is selected, return the selection
+                return sn(nil, {
+                    t(env.LS_SELECT_RAW),
+                })
+            else
+                -- Otherwise, provide an empty insert node
+                return sn(nil, {
+                    i(1),
+                })
+            end
+        end, {}),
+        t("}"),
+    }),
+
+    -- monospaced
+    s({ trig = "FTT", snippetType = "autosnippet" }, {
+        t("\\texttt{"),
+        d(1, function(args, parent)
+            local env = parent.snippet.env
+            if #env.LS_SELECT_RAW > 0 then
+                -- If text is selected, return the selection
+                return sn(nil, {
+                    t(env.LS_SELECT_RAW),
+                })
+            else
+                -- Otherwise, provide an empty insert node
+                return sn(nil, {
+                    i(1),
+                })
+            end
+        end, {}),
+        t("}"),
+    }),
+
+    -- center
+    s({ trig = "BCEN", wordTrig = true, snippetType = "autosnippet", condition = line_begin }, {
+        t({ "\\begin{center}", "\t" }),
+        i(1),
+        t({ "", "\\end{center}", "" }),
+    }),
+
+    -- frame
+    s({ trig = "BFR", snippetType = "autosnippet" }, {
+        t("\\begin{frame}"),
+        d(1, function(args, parent)
+            local env = parent.snippet.env
+            if #env.LS_SELECT_RAW > 0 then
+                -- If text is selected, return the selection
+                return sn(nil, {
+                    t({ "", "\t" }),
+                    t(env.LS_SELECT_RAW),
+                })
+            else
+                -- Otherwise, provide an empty insert node
+                return sn(nil, {
+                    t("\t\\frametitle{"),
+                    i(1, "title of the frame"),
+                    i(2, "body"),
+                })
+            end
+        end, {}),
+        t({ "", "", "\\end{frame}", "" }),
+    }),
+
     -- MATH ENVIRONMENTS
     -- inline math
     s({ trig = "mk", wordTrig = true, snippetType = "autosnippet" }, {
@@ -77,28 +173,6 @@ M = {
         t({ "\\begin{enumerate}", "\t\\item " }),
         i(1, "text"),
         t({ "", "\\end{enumerate}", "" }),
-    }),
-
-    -- FONT STYLE ENVIRONMENTS
-    -- bold
-    s({ trig = "FBF", wordTrig = true, snippetType = "autosnippet" }, {
-        t("\\textbf{"),
-        i(1),
-        t("}"),
-    }),
-
-    -- italic
-    s({ trig = "FIT", wordTrig = true, snippetType = "autosnippet" }, {
-        t("\\textit{"),
-        i(1),
-        t("}"),
-    }),
-
-    -- monospaced
-    s({ trig = "FTT", wordTrig = true, snippetType = "autosnippet" }, {
-        t("\\texttt{"),
-        i(1),
-        t("}"),
     }),
 
     -- THEOREM TYPE ENVIRONMENTS

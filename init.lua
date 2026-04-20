@@ -787,7 +787,7 @@ require("lazy").setup({
                         end,
                     },
                 },
-                opts = { enable_autosnippets = true },
+                opts = { enable_autosnippets = true, store_selection_keys = "<Tab>" },
             },
             "folke/lazydev.nvim",
             "erooke/blink-cmp-latex",
