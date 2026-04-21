@@ -4,8 +4,7 @@ local sn = ls.snippet_node
 local d = ls.dynamic_node
 local t = ls.text_node
 local i = ls.insert_node
-local f = ls.function_node
-local fmt = require("luasnip.extras.fmt").fmt
+local c = ls.choice_node
 
 -- Math context check using vimtex
 local in_mathzone = function()
@@ -99,6 +98,37 @@ M = {
             end
         end, {}),
         t("}"),
+    }),
+
+    -- text color
+    s({ trig = "COLOR" }, {
+        t("\\textcolor{"),
+        c(1, {
+            sn(nil, {
+                i(1, "ForestGreen"),
+                t({ "}{", "\t" }),
+                i(2, "body"),
+                t({ "", "}", "" }),
+            }),
+            sn(nil, {
+                i(1, "magenta"),
+                t({ "}", "\t" }),
+                i(2, "body"),
+                t({ "", "}", "" }),
+            }),
+            sn(nil, {
+                i(1, "Blue"),
+                t({ "}{", "\t" }),
+                i(2, "body"),
+                t({ "", "}", "" }),
+            }),
+            sn(nil, {
+                i(1, "Turquoise"),
+                t({ "}{", "\t" }),
+                i(2, "body"),
+                t({ "", "}", "" }),
+            }),
+        }),
     }),
 
     -- center
