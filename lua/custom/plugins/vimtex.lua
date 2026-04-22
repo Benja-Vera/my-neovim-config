@@ -11,7 +11,7 @@ return {
         if is_windows then
             vim.g.vimtex_view_method = "general"
         elseif is_linux then
-            vim.g.vimtex_new_method = "zathura"
+            vim.g.vimtex_view_method = "zathura"
         end
         vim.g.vimtex_imaps_leader = "~"
         vim.g.vimtex_quickfix_autoclose_after_keystrokes = 2
