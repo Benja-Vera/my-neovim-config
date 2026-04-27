@@ -944,7 +944,7 @@ require("lazy").setup({
         build = ":TSUpdate",
         branch = "main",
         config = function()
-            local parsers = { "python", "lua" }
+            local parsers = { "python", "lua", "markdown" }
             require("nvim-treesitter").install(parsers)
         end,
     },
