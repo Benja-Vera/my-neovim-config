@@ -1,0 +1,65 @@
+\documentclass[paper=a4,fontsize=11pt]{scrlttr2}
+\usepackage{geometry}
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage{graphicx}
+\usepackage{lipsum}
+% \usepackage{showframe}
+
+
+% --- Letterhead Configuration ---
+\setkomavar{fromname}{Alejandro Jofré}
+\setkomavar{fromaddress}{Center for Mathematical Modeling \\ Beauchef \# 851, 8370456 \\ Santiago, Chile}
+
+% --- Logo/Header Setup ---
+% KOMA-Script uses firsthead for the first page
+\setkomavar{firsthead}{%
+    \raisebox{0cm}{%
+        \includegraphics[height=2.2cm]{img/fcfm_dim.png}%
+    }
+    \hfill
+    \raisebox{0.45cm}{%
+        \includegraphics[width=5.6cm]{img/cmm.png}%
+    }
+}
+
+% --- Basic Letter Variables ---
+\setkomavar{subject}{Reference Letter}
+\setkomavar{date}{\today}
+
+\begin{document}
+\begin{letter}{Recipient Name \\ Recipient Address \\ City, Zip}
+
+	\opening{Dear Recipient,}
+
+	\lipsum[1-2]
+
+	\closing{Sincerely,}
+
+\end{letter}
+\end{document}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
