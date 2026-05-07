@@ -134,7 +134,7 @@ vim.keymap.set("n", "<C-k>", "<C-w><C-k>", { desc = "Move focus to the upper win
 vim.api.nvim_create_user_command("Template", function(opts)
     local arg = vim.split(opts.args, " ")
     local out = vim.fn.system({
-        "python",
+        "python3",
         vim.fn.stdpath("config") .. "/scripts/template.py",
         arg[1],
         arg[2],
