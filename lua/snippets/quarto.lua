@@ -268,11 +268,11 @@ M = {
         condition = in_mathzone,
         show_condition = in_mathzone,
     }, {
-        t({ "\\begin{equation}, \\label{eq:" }),
+        t({ "\\begin{equation} \\label{eq:" }),
         i(1, "label"),
         t({ "}", "" }),
         i(2, "body"),
-        t(". \\tag{"),
+        t(" . \\tag{"),
         i(3, "TAG"),
         t("}"),
         t({ "", "\\end{equation}", "" }),
