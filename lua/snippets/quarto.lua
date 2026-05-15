@@ -3,6 +3,7 @@ local s = ls.snippet
 local t = ls.text_node
 local i = ls.insert_node
 local c = ls.choice_node
+local sn = ls.snippet_node
 
 local fmt = require("luasnip.extras.fmt").fmt
 local rep = require("luasnip.extras").rep
@@ -270,11 +271,16 @@ M = {
     }, {
         t({ "\\begin{equation} \\label{eq:" }),
         i(1, "label"),
-        t({ "}", "" }),
+        t({ "}", "\t" }),
         i(2, "body"),
-        t(" . \\tag{"),
-        i(3, "TAG"),
-        t("}"),
+        c(3, {
+            sn(nil, {
+                t(" . \\tag{"),
+                i(1, "TAG"),
+                t("}"),
+            }),
+            t(" ."),
+        }),
         t({ "", "\\end{equation}", "" }),
     }),
 

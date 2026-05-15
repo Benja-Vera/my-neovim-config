@@ -59,6 +59,20 @@ return {
         end, {}),
     }),
 
+    -- \alphadot -> \dot{\alpha}
+    postfix({
+        trig = "dot",
+        match_pattern = [[[\\%w%.%_%-%"%']+$]],
+        condition = in_mathzone,
+        show_condition = no_show,
+        snippetType = "autosnippet",
+        dscr = "postfix dot",
+    }, {
+        f(function(_, parent)
+            return "\\dot{" .. parent.snippet.env.POSTFIX_MATCH .. "}"
+        end, {}),
+    }),
+
     -- \alphatil -> \tilde{\alpha}
     postfix({
         trig = "til",
