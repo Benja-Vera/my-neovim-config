@@ -14,7 +14,38 @@ local in_mathzone = function()
 end
 
 M = {
+    -- FONT
+    -- italic
+    s("italic", {
+        t("*"),
+        i(1, "text"),
+        t("* "),
+    }),
+
+    -- bold
+    s("bold", {
+        t("**"),
+        i(1, "text"),
+        t("** "),
+    }),
+
+    -- code
+    s("inline-code", {
+        t("`"),
+        i(1, "text"),
+        t("`"),
+    }),
+
     -- BLOCKS
+    -- executable code block
+    s("executable-codeblock", {
+        t("```{"),
+        i(1, "lang"),
+        t({ "}", "#| code-fold: true", "" }),
+        i(2, "code"),
+        t({ "", "```", "" }),
+    }),
+
     -- definition
     s(
         "def",
@@ -235,7 +266,7 @@ M = {
         i(1, "label"),
         t({ "}", "" }),
         i(2, "body"),
-        t({ "", "\\end{align}", "" }),
+        t({ "", "\\end{align}" }),
     }),
 
     -- unnumbered align
@@ -247,7 +278,7 @@ M = {
     }, {
         t({ "\\begin{align*}", "" }),
         i(1),
-        t({ "", "\\end{align*}", "" }),
+        t({ "", "\\end{align*}" }),
     }),
 
     -- array
@@ -259,7 +290,7 @@ M = {
     }, {
         t({ "\\begin{array}{c}", "" }),
         i(1),
-        t({ "", "\\end{array}", "" }),
+        t({ "", "\\end{array}" }),
     }),
 
     -- numbered equation
@@ -281,7 +312,7 @@ M = {
             }),
             t(" ."),
         }),
-        t({ "", "\\end{equation}", "" }),
+        t({ "", "\\end{equation}" }),
     }),
 
     -- cases
