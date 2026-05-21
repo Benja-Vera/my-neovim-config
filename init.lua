@@ -515,6 +515,7 @@ do
             -- You can specify filetypes to autoformat on save here:
             local enabled_filetypes = {
                 lua = true,
+                julia = true,
                 -- python = true,
             }
             if enabled_filetypes[vim.bo[bufnr].filetype] then
@@ -528,6 +529,7 @@ do
         },
         -- You can also specify external formatters in here.
         formatters_by_ft = {
+            julia = { "runic" },
             -- rust = { 'rustfmt' },
             -- Conform can also run multiple formatters sequentially
             -- python = { "isort", "black" },
