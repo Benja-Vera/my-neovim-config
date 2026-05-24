@@ -18,7 +18,6 @@ ls.add_snippets("quarto", require("snippets.general.common"))
 ls.add_snippets("quarto", require("snippets.general.fractions"))
 require("quarto.quarto-math-mappings")()
 
-vim.cmd.colorscheme("kanagawa-dragon")
 vim.opt_local.spell = true
 vim.opt_local.spelllang = { "es" }
 

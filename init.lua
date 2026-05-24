@@ -93,22 +93,24 @@ do
     vim.pack.add({ gh("NMAC427/guess-indent.nvim") })
     require("guess-indent").setup({})
     -- vim.pack.add({ gh("mhinz/vim-startify") })
-    -- vim.pack.add({ gh("lewis6991/gitsigns.nvim") })
-    -- require("gitsigns").setup({})
-    -- vim.pack.add({ gh("folke/which-key.nvim") })
-    -- require("which-key").setup({
-    --     -- Delay between pressing a key and opening which-key (milliseconds)
-    --     delay = 0,
-    --     icons = { mappings = vim.g.have_nerd_font },
-    --     -- Document existing key chains
-    --     spec = {
-    --         { "<leader>s", group = "[S]earch", mode = { "n", "v" } },
-    --         { "<leader>t", group = "[T]oggle" },
-    --         { "<leader>h", group = "Git [H]unk", mode = { "n", "v" } }, -- Enable gitsigns recommended keymaps first
-    --         { "gr", group = "LSP Actions", mode = { "n" } },
-    --     },
-    -- })
+    vim.pack.add({ gh("lewis6991/gitsigns.nvim") })
+    require("gitsigns").setup({})
+    vim.pack.add({ gh("nvim-tree/nvim-web-devicons") })
+    vim.pack.add({ gh("folke/which-key.nvim") })
+    require("which-key").setup({
+        -- Delay between pressing a key and opening which-key (milliseconds)
+        delay = 0,
+        icons = { mappings = vim.g.have_nerd_font },
+        -- Document existing key chains
+        spec = {
+            { "<leader>s", group = "[S]earch", mode = { "n", "v" } },
+            { "<leader>t", group = "[T]oggle" },
+            { "<leader>h", group = "Git [H]unk", mode = { "n", "v" } }, -- Enable gitsigns recommended keymaps first
+            { "gr", group = "LSP Actions", mode = { "n" } },
+        },
+    })
 
+    -- colorschemes
     vim.pack.add({ gh("folke/tokyonight.nvim") })
     ---@diagnostic disable-next-line: missing-fields
     require("tokyonight").setup({
@@ -116,17 +118,16 @@ do
             comments = { italic = false }, -- Disable italics in comments
         },
     })
-
-    -- Load the colorscheme here.
-    -- Like many other themes, this one has different styles, and you could load
-    -- any other, such as 'tokyonight-storm', 'tokyonight-moon', or 'tokyonight-day'.
-    vim.cmd.colorscheme("tokyonight-night")
-
     vim.pack.add({ gh("morhetz/gruvbox") })
+    vim.g.gruvbox_contrast_dark = "hard"
     vim.pack.add({ gh("sainnhe/everforest") })
     vim.pack.add({ gh("navarasu/onedark.nvim") })
     vim.pack.add({ gh("rose-pine/neovim") })
     vim.pack.add({ gh("rebelot/kanagawa.nvim") })
+
+    -- NOTE: Here you put the default colorscheme, and specify other overwrite prpeferences in dedicated ftplugin files.
+    -- I thought of bundling the functionality in a deidcated file but it results in flickering.
+    vim.cmd.colorscheme("tokyonight-night")
 
     vim.pack.add({ gh("folke/todo-comments.nvim") })
     require("todo-comments").setup({ signs = false })
@@ -249,7 +250,8 @@ do
     vim.keymap.set("n", "<leader>sd", builtin.diagnostics, { desc = "[S]earch [D]iagnostics" })
     vim.keymap.set("n", "<leader>sr", builtin.resume, { desc = "[S]earch [R]esume" })
     vim.keymap.set("n", "<leader>s.", builtin.oldfiles, { desc = '[S]earch Recent Files ("." for repeat)' })
-    vim.keymap.set("n", "<leader>sc", builtin.commands, { desc = "[S]earch [C]ommands" })
+    vim.keymap.set("n", "<leader>sm", builtin.commands, { desc = "[S]earch co[M]mands" })
+    vim.keymap.set("n", "<leader>sc", builtin.colorscheme, { desc = "[S]earch [C]olorschemes" })
     vim.keymap.set("n", "<leader><leader>", builtin.buffers, { desc = "[ ] Find existing buffers" })
 
     -- Add Telescope-based LSP pickers when an LSP attaches to a buffer.
@@ -558,7 +560,7 @@ do
     vim.pack.add({ { src = gh("nvim-treesitter/nvim-treesitter"), version = "main" } })
 
     -- Ensure basic parsers are installed
-    local parsers = { "bash", "diff", "html", "lua", "luadoc", "query", "vim", "vimdoc", "julia", "yaml" }
+    local parsers = { "bash", "diff", "html", "lua", "luadoc", "query", "vim", "vimdoc", "julia", "yaml", "python" }
     require("nvim-treesitter").install(parsers)
 
     ---@param buf integer
@@ -776,3 +778,6 @@ vim.api.nvim_create_autocmd("FileType", {
         vim.treesitter.stop(args.buf)
     end,
 })
+
+-- NOTE: This is needed for showing the diagnostics in virtual text.
+vim.diagnostic.config({ virtual_text = true })

@@ -2,7 +2,7 @@
 local is_windows = vim.fn.has("win32") == 1
 local is_linux = vim.fn.has("unix") == 1
 
-
+-- NOTE: We don't need this anymore
 if is_windows then
     vim.g.sqlite_clib_path = "C:/Users/benja/sqlite3.dll"
 end
@@ -10,10 +10,9 @@ end
 -- Set to true if you have a Nerd Font installed and selected in the terminal
 vim.g.have_nerd_font = false
 
--- [[ Setting options ]]
--- See `:help vim.o`
--- NOTE: You can change these options as you wish!
---  For more options, you can see `:help option-list`
+-- Disable the node and perl provider warnings, which I'm not going to use
+vim.g.loaded_node_provider = false
+vim.g.loaded_perl_provider = false
 
 -- Enable running local lua files for project-specific configuration
 vim.o.exrc = true

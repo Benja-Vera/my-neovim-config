@@ -9,3 +9,5 @@ vim.keymap.set("v", "j", "gj", opts)
 vim.keymap.set("v", "k", "gk", opts)
 vim.keymap.set("s", "j", "j", opts)
 vim.keymap.set("s", "k", "k", opts)
+
+vim.cmd.colorscheme("kanagawa-dragon")
