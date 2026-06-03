@@ -2,6 +2,8 @@ local ls = require("luasnip")
 local s = ls.snippet
 local t = ls.text_node
 local i = ls.insert_node
+local d = ls.dynamic_node
+local sn = ls.snippet_node
 
 -- Math context check using vimtex
 local in_mathzone = function()
@@ -155,5 +157,106 @@ return {
         i(3),
         t(" "),
         i(0),
+    }),
+
+    -- LEFT RIGHT EXPRESSIONS
+    s({
+        trig = "\\leftp",
+        snippetType = "autosnippet",
+        condition = in_mathzone,
+        show_condition = in_mathzone,
+        wordTrig = false,
+    }, {
+        t("\\left( "),
+        d(1, function(args, parent)
+            local env = parent.snippet.env
+            if #env.LS_SELECT_RAW > 0 then
+                -- If text is selected, return the selection
+                return sn(nil, {
+                    t(env.LS_SELECT_RAW),
+                })
+            else
+                -- Otherwise, provide an empty insert node
+                return sn(nil, {
+                    i(1),
+                })
+            end
+        end, {}),
+        t(" \\right)"),
+    }),
+
+    s({
+        trig = "\\leftb",
+        snippetType = "autosnippet",
+        condition = in_mathzone,
+        show_condition = in_mathzone,
+        wordTrig = false,
+    }, {
+        t("\\left[ "),
+        d(1, function(args, parent)
+            local env = parent.snippet.env
+            if #env.LS_SELECT_RAW > 0 then
+                -- If text is selected, return the selection
+                return sn(nil, {
+                    t(env.LS_SELECT_RAW),
+                })
+            else
+                -- Otherwise, provide an empty insert node
+                return sn(nil, {
+                    i(1),
+                })
+            end
+        end, {}),
+        t(" \\right]"),
+    }),
+
+    s({
+        trig = "\\leftv",
+        snippetType = "autosnippet",
+        condition = in_mathzone,
+        show_condition = in_mathzone,
+        wordTrig = false,
+    }, {
+        t("\\left| "),
+        d(1, function(args, parent)
+            local env = parent.snippet.env
+            if #env.LS_SELECT_RAW > 0 then
+                -- If text is selected, return the selection
+                return sn(nil, {
+                    t(env.LS_SELECT_RAW),
+                })
+            else
+                -- Otherwise, provide an empty insert node
+                return sn(nil, {
+                    i(1),
+                })
+            end
+        end, {}),
+        t(" \\right|"),
+    }),
+
+    s({
+        trig = "\\leftc",
+        snippetType = "autosnippet",
+        condition = in_mathzone,
+        show_condition = in_mathzone,
+        wordTrig = false,
+    }, {
+        t("\\left\\{ "),
+        d(1, function(args, parent)
+            local env = parent.snippet.env
+            if #env.LS_SELECT_RAW > 0 then
+                -- If text is selected, return the selection
+                return sn(nil, {
+                    t(env.LS_SELECT_RAW),
+                })
+            else
+                -- Otherwise, provide an empty insert node
+                return sn(nil, {
+                    i(1),
+                })
+            end
+        end, {}),
+        t(" \\right\\}"),
     }),
 }

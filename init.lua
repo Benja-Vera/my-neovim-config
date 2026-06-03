@@ -124,6 +124,7 @@ do
     vim.pack.add({ gh("navarasu/onedark.nvim") })
     vim.pack.add({ gh("rose-pine/neovim") })
     vim.pack.add({ gh("rebelot/kanagawa.nvim") })
+    vim.pack.add({ gh("AmberLehmann/candyland.nvim") })
 
     -- NOTE: Here you put the default colorscheme, and specify other overwrite prpeferences in dedicated ftplugin files.
     -- I thought of bundling the functionality in a deidcated file but it results in flickering.
@@ -654,6 +655,13 @@ do
         },
     })
     -- keymaps
+    vim.keymap.set("n", "<leader>a", function()
+        require("nvim-treesitter-textobjects.swap").swap_next("@parameter.inner")
+    end, { desc = "Swap with next parameter" })
+    vim.keymap.set("n", "<leader>A", function()
+        require("nvim-treesitter-textobjects.swap").swap_previous("@parameter.outer")
+    end, { desc = "Swap with previous parameter" })
+    -- keymaps
     -- You can use the capture groups defined in `textobjects.scm`
     local ts_select = require("nvim-treesitter-textobjects.select")
     vim.keymap.set({ "x", "o" }, "af", function()
@@ -733,7 +741,7 @@ require("blink.cmp").setup({
         -- <c-k>: Toggle signature help
         --
         -- See `:help blink-cmp-config-keymap` for defining your own keymap
-        preset = "default",
+        preset = "enter",
 
         -- For more advanced Luasnip keymaps (e.g. selecting choice nodes, expansion) see:
         --    https://github.com/L3MON4D3/LuaSnip?tab=readme-ov-file#keymaps

@@ -184,6 +184,7 @@ return {
                 i(1, "\\edge"),
                 t("]["),
                 i(2, "\\time"),
+                t("]"),
             }),
         }),
     }),
@@ -324,14 +325,81 @@ return {
         }),
     }),
 
-    -- SUMMATIONS
-    -- sumt -> \sum_{\time}
-    s({ trig = "sumt", snippetType = "autosnippet", condition = in_mathzone }, {
-        t("\\sum_{\\time}"),
+    -- qc: \productioncost
+    s({ trig = "qc", snippetType = "autosnippet", condition = in_mathzone }, {
+        t("\\productioncost"),
+        c(1, {
+            t(""),
+            sn(nil, {
+                t("["),
+                i(1, "\\node"),
+                t("]"),
+            }),
+        }),
     }),
 
-    -- sume -> \sum_{\edge \in \neighbourset}
-    s({ trig = "sume", snippetType = "autosnippet", condition = in_mathzone }, {
+    -- sc: \storagecost
+    s({ trig = "sc", snippetType = "autosnippet", condition = in_mathzone }, {
+        t("\\storagecost"),
+        c(1, {
+            t(""),
+            sn(nil, {
+                t("["),
+                i(1, "\\node"),
+                t("]"),
+            }),
+        }),
+    }),
+
+    -- VECTORS
+    -- vqs - \vectorproductionstate
+    s({ trig = "vqs", snippetType = "autosnippet", condition = in_mathzone }, {
+        t("\\vectorproductionstate"),
+    }),
+
+    -- vfs - \vectorflowstate
+    s({ trig = "vfs", snippetType = "autosnippet", condition = in_mathzone }, {
+        t("\\vectorflowstate"),
+    }),
+
+    -- vss - \vectorstoragestate
+    s({ trig = "vss", snippetType = "autosnippet", condition = in_mathzone }, {
+        t("\\vectorstoragestate"),
+    }),
+
+    -- vqr - \vectorproductionramp
+    s({ trig = "vqr", snippetType = "autosnippet", condition = in_mathzone }, {
+        t("\\vectorproductionramp"),
+    }),
+
+    -- vfr - \vectorflowramp
+    s({ trig = "vfr", snippetType = "autosnippet", condition = in_mathzone }, {
+        t("\\vectorflowramp"),
+    }),
+
+    -- vsr - \vectorstorageramp
+    s({ trig = "vsr", snippetType = "autosnippet", condition = in_mathzone }, {
+        t("\\vectorstorageramp"),
+    }),
+
+    -- SUMMATIONS
+    -- sumTT -> \sum_{\time}
+    s({ trig = "sumTT", snippetType = "autosnippet", condition = in_mathzone }, {
+        t("\\sum_{\\time \\in \\timeset}"),
+    }),
+
+    -- sumKK -> \sum_{\edge \in \neighbourset}
+    s({ trig = "sumKK", snippetType = "autosnippet", condition = in_mathzone }, {
         t("\\sum_{\\edge \\in \\neighbourset}"),
+    }),
+
+    -- sumNN -> \sum_{\node \in \nodeset}
+    s({ trig = "sumNN", snippetType = "autosnippet", condition = in_mathzone }, {
+        t("\\sum_{\\node \\in \\nodeset}"),
+    }),
+
+    -- sumGG -> \sum_{\node \in \gennodeset}
+    s({ trig = "sumGG", snippetType = "autosnippet", condition = in_mathzone }, {
+        t("\\sum_{\\node \\in \\gennodeset}"),
     }),
 }
