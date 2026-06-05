@@ -11,42 +11,42 @@ end
 
 return {
     -- INDICES, SETS, AND TOTALS
-    -- DD: \demandnodeset
+    -- DD -> \demandnodeset
     s({ trig = "DD", snippetType = "autosnippet", condition = in_mathzone }, {
         t("\\demandnodeset"),
     }),
 
-    -- GD: \dispatchablegennodeset
+    -- GD -> \dispatchablegennodeset
     s({ trig = "GD", snippetType = "autosnippet", condition = in_mathzone }, {
         t("\\dispatchablegennodeset"),
     }),
 
-    -- GV: \variablegennodeset
+    -- GV -> \variablegennodeset
     s({ trig = "GV", snippetType = "autosnippet", condition = in_mathzone }, {
         t("\\variablegennodeset"),
     }),
 
-    -- GG: \gennodeset
+    -- GG -> \gennodeset
     s({ trig = "GG", snippetType = "autosnippet", condition = in_mathzone }, {
         t("\\gennodeset"),
     }),
 
-    -- NN: \nodeset
+    -- NN -> \nodeset
     s({ trig = "NN", snippetType = "autosnippet", condition = in_mathzone }, {
         t("\\nodeset"),
     }),
 
-    -- EE: \edgeset
+    -- EE -> \edgeset
     s({ trig = "EE", snippetType = "autosnippet", condition = in_mathzone }, {
         t("\\edgeset"),
     }),
 
-    -- TT: \\timeset
+    -- TT -> \\timeset
     s({ trig = "TT", snippetType = "autosnippet", condition = in_mathzone }, {
         t("\\timeset"),
     }),
 
-    -- KK: \neighbourset
+    -- KK -> \neighbourset
     s({ trig = "KK", snippetType = "autosnippet", condition = in_mathzone }, {
         t("\\neighbourset"),
         c(1, {
@@ -75,7 +75,7 @@ return {
     }),
 
     -- NETWORK DATA
-    -- sgn: \sgn(\edge, \node)
+    -- sgn -> \sgn(\edge, \node)
     s({ trig = "sgn", snippetType = "autosnippet", condition = in_mathzone }, {
         t("\\sgn("),
         i(1, "\\edge"),
@@ -205,7 +205,7 @@ return {
     }),
 
     -- STATE BOUNDS
-    -- dqMs: \dispatchableproductionmaxstate
+    -- dqMs -> \dispatchableproductionmaxstate
     s({ trig = "dqMs", snippetType = "autosnippet", condition = in_mathzone }, {
         t("\\dispatchableproductionmaxstate"),
         c(1, {
@@ -218,7 +218,7 @@ return {
         }),
     }),
 
-    -- vqMs: \variableproductionmaxstate
+    -- vqMs -> \variableproductionmaxstate
     s({ trig = "vqMs", snippetType = "autosnippet", condition = in_mathzone }, {
         t("\\variableproductionmaxstate"),
         c(1, {
@@ -233,7 +233,7 @@ return {
         }),
     }),
 
-    -- fMs: \flowmaxstate
+    -- fMs -> \flowmaxstate
     s({ trig = "fMs", snippetType = "autosnippet", condition = in_mathzone }, {
         t("\\flowmaxstate"),
         c(1, {
@@ -246,7 +246,7 @@ return {
         }),
     }),
 
-    -- sMs: \storagemaxstate
+    -- sMs -> \storagemaxstate
     s({ trig = "sMs", snippetType = "autosnippet", condition = in_mathzone }, {
         t("\\storagemaxstate"),
         c(1, {
@@ -260,7 +260,7 @@ return {
     }),
 
     -- RAMP BOUNDS
-    -- qMr: \productionmaxramp
+    -- qMr -> \productionmaxramp
     s({ trig = "qMr", snippetType = "autosnippet", condition = in_mathzone }, {
         t("\\productionmaxramp"),
         c(1, {
@@ -273,7 +273,7 @@ return {
         }),
     }),
 
-    -- qmr: \productionminramp
+    -- qmr -> \productionminramp
     s({ trig = "qmr", snippetType = "autosnippet", condition = in_mathzone }, {
         t("\\productionminramp"),
         c(1, {
@@ -286,7 +286,7 @@ return {
         }),
     }),
 
-    -- fMr: \flowmaxramp
+    -- fMr -> \flowmaxramp
     s({ trig = "fMr", snippetType = "autosnippet", condition = in_mathzone }, {
         t("\\flowmaxramp"),
         c(1, {
@@ -299,7 +299,7 @@ return {
         }),
     }),
 
-    -- sMr: \storagemaxramp
+    -- sMr -> \storagemaxramp
     s({ trig = "sMr", snippetType = "autosnippet", condition = in_mathzone }, {
         t("\\storagemaxramp"),
         c(1, {
@@ -312,7 +312,7 @@ return {
         }),
     }),
 
-    -- smr: \storageminramp
+    -- smr -> \storageminramp
     s({ trig = "smr", snippetType = "autosnippet", condition = in_mathzone }, {
         t("\\storageminramp"),
         c(1, {
@@ -325,7 +325,7 @@ return {
         }),
     }),
 
-    -- qc: \productioncost
+    -- qc -> \productioncost
     s({ trig = "qc", snippetType = "autosnippet", condition = in_mathzone }, {
         t("\\productioncost"),
         c(1, {
@@ -338,7 +338,7 @@ return {
         }),
     }),
 
-    -- sc: \storagecost
+    -- sc -> \storagecost
     s({ trig = "sc", snippetType = "autosnippet", condition = in_mathzone }, {
         t("\\storagecost"),
         c(1, {
@@ -352,34 +352,95 @@ return {
     }),
 
     -- VECTORS
-    -- vqs - \vectorproductionstate
+    -- vqs -> \vectorproductionstate
     s({ trig = "vqs", snippetType = "autosnippet", condition = in_mathzone }, {
         t("\\vectorproductionstate"),
     }),
 
-    -- vfs - \vectorflowstate
+    -- vfs -> \vectorflowstate
     s({ trig = "vfs", snippetType = "autosnippet", condition = in_mathzone }, {
         t("\\vectorflowstate"),
     }),
 
-    -- vss - \vectorstoragestate
+    -- vss -> \vectorstoragestate
     s({ trig = "vss", snippetType = "autosnippet", condition = in_mathzone }, {
         t("\\vectorstoragestate"),
     }),
 
-    -- vqr - \vectorproductionramp
+    -- vqr -> \vectorproductionramp
     s({ trig = "vqr", snippetType = "autosnippet", condition = in_mathzone }, {
         t("\\vectorproductionramp"),
     }),
 
-    -- vfr - \vectorflowramp
+    -- vfr -> \vectorflowramp
     s({ trig = "vfr", snippetType = "autosnippet", condition = in_mathzone }, {
         t("\\vectorflowramp"),
     }),
 
-    -- vsr - \vectorstorageramp
+    -- vsr -> \vectorstorageramp
     s({ trig = "vsr", snippetType = "autosnippet", condition = in_mathzone }, {
         t("\\vectorstorageramp"),
+    }),
+
+    -- KKT MULTIPLIERS
+    -- pp -> \kktbalance
+    s({ trig = "pp", snippetType = "autosnippet", condition = in_mathzone }, {
+        t("\\kktbalance"),
+        c(1, {
+            t(""),
+            sn(nil, {
+                t("["),
+                i(1, "\\node"),
+                t("]["),
+                i(2, "\\time"),
+                t("]"),
+            }),
+        }),
+    }),
+
+    -- mq -> \kktproduction
+    s({ trig = "mq", snippettype = "autosnippet", condition = in_mathzone }, {
+        t("\\kktproduction"),
+        c(1, {
+            t(""),
+            sn(nil, {
+                t("["),
+                i(1, "\\node"),
+                t("]["),
+                i(2, "\\time"),
+                t("]"),
+            }),
+        }),
+    }),
+
+    -- mf -> \kktflow
+    s({ trig = "mf", snippettype = "autosnippet", condition = in_mathzone }, {
+        t("\\kktflow"),
+        c(1, {
+            t(""),
+            sn(nil, {
+                t("["),
+                i(1, "\\edge"),
+                t("]["),
+                i(2, "\\time"),
+                t("]"),
+            }),
+        }),
+    }),
+
+    -- ms -> \kktstorage
+    s({ trig = "ms", snippettype = "autosnippet", condition = in_mathzone }, {
+        t("\\kktstorage"),
+        c(1, {
+            t(""),
+            sn(nil, {
+                t("["),
+                i(1, "\\node"),
+                t("]["),
+                i(2, "\\time"),
+                t("]"),
+            }),
+        }),
     }),
 
     -- SUMMATIONS

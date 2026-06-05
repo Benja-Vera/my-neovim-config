@@ -190,6 +190,18 @@ M = {
         t({ "", "\\end{align*}", "" }),
     }),
 
+    -- cases
+    s({
+        trig = "BCAS",
+        wordTrig = true,
+        snippetType = "autosnippet",
+        condition = line_begin,
+    }, {
+        t({ "\\begin{cases}", "\t" }),
+        i(1),
+        t({ "", "\\end{cases}", "" }),
+    }),
+
     -- LIST ENVIRONMENTS
     -- itemize
     s({ trig = "BIT", wordTrig = true, snippetType = "autosnippet", condition = line_begin }, {

@@ -322,9 +322,9 @@ M = {
         condition = in_mathzone,
         show_condition = in_mathzone,
     }, {
-        t({ "\\begin{cases}", "" }),
+        t({ "\\begin{cases}", "\t" }),
         i(1),
-        t({ "", "\\end{cases}" }),
+        t({ "", "\\end{cases}", "" }),
     }),
 
     -- GEN -> \langle #1 \rangle #2
