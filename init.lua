@@ -311,6 +311,19 @@ do
     vim.keymap.set("n", "<leader>sn", function()
         builtin.find_files({ cwd = vim.fn.stdpath("config") })
     end, { desc = "[S]earch [N]eovim files" })
+
+    vim.pack.add({ gh("mikavilpas/yazi.nvim") })
+
+    require("yazi").setup({
+        open_for_directories = false,
+        keymaps = {
+            show_help = "<F1>",
+        },
+    })
+
+    vim.keymap.set({ "n", "v" }, "<leader>-", "<cmd>Yazi<CR>")
+    vim.keymap.set("n", "<leader>cw", "<cmd>Yazi cwd<CR>")
+    vim.keymap.set("n", "<C-Up>", "<cmd>Yazi toggle<CR>")
 end
 
 -- ============================================================
