@@ -161,6 +161,13 @@ M = {
         t({ "", "", "\\end{frame}", "" }),
     }),
 
+    -- verbatim: code block
+    s({ trig = "BVER", wordTrig = true, snippetType = "autosnippet", condition = line_begin }, {
+        t({ "\\begin{verbatim}", "" }),
+        i(1),
+        t({ "", "\\end{verbatim}", "" }),
+    }),
+
     -- MATH ENVIRONMENTS
     -- inline math
     s({ trig = "mk", wordTrig = true, snippetType = "autosnippet" }, {
@@ -174,6 +181,41 @@ M = {
         t({ "\\[", "\t" }),
         i(1),
         t({ "", "\\]", "" }),
+    }),
+
+    -- equation
+    s({ trig = "BEQ", wordTrig = true, snippetType = "autosnippet", condition = line_begin }, {
+        t({ "\\begin{equation}", "\t" }),
+        i(1),
+        t({ "", "\\end{equation}", "" }),
+    }),
+
+    -- unnumbered equation
+    s({ trig = "BSEQ", wordTrig = true, snippetType = "autosnippet", condition = line_begin }, {
+        t({ "\\begin{equation*}", "\t" }),
+        i(1),
+        t({ "", "\\end{equation*}", "" }),
+    }),
+
+    -- subequations
+    s({ trig = "BSE", wordTrig = true, condition = line_begin }, {
+        t({ "\\begin{subequations}", "" }),
+        i(1),
+        t({ "", "\\end{subequations}", "" }),
+    }),
+
+    -- gather
+    s({ trig = "BGA", wordTrig = true, snippetType = "autosnippet", condition = line_begin }, {
+        t({ "\\begin{gather}", "\t" }),
+        i(1),
+        t({ "", "\\end{gather}", "" }),
+    }),
+
+    -- unnumbered gather
+    s({ trig = "BSGA", wordTrig = true, snippetType = "autosnippet", condition = line_begin }, {
+        t({ "\\begin{gather*}", "\t" }),
+        i(1),
+        t({ "", "\\end{gather*}", "" }),
     }),
 
     -- align
