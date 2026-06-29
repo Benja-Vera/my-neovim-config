@@ -168,6 +168,23 @@ M = {
         t({ "", "\\end{verbatim}", "" }),
     }),
 
+    -- figure
+    s({ trig = "BFI", wordTrig = true, snippetType = "autosnippet", condition = line_begin }, {
+        t("\\begin{figure}["),
+        i(1, "htbp"),
+        t("] \\label{fig:"),
+        i(3, "label"),
+        t({ "}", "\t\\centering", "\t\\includegraphics[width=" }),
+        i(4, "0.5"),
+        t("\\linewidth]{"),
+        i(2, "path/to/image.pdf"),
+        t({ "}", "" }),
+        t("\t\\caption{"),
+        i(5, "Caption here."),
+        t({ "}", "" }),
+        t({ "\\end{figure}", "" }),
+    }),
+
     -- MATH ENVIRONMENTS
     -- inline math
     s({ trig = "mk", wordTrig = true, snippetType = "autosnippet" }, {
