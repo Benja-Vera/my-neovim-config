@@ -184,6 +184,29 @@ M = {
         t({ "}", "\\end{figure}", "" }),
     }),
 
+    -- subfigures
+    s({ trig = "BMFI", wordTrig = true, snippetType = "autosnippet", condition = line_begin }, {
+        t("\\begin{figure}["),
+        i(1, "htbp"),
+        t({ "]", "", "\\begin{subfigure}{0.5\\textwidth}", "\\includegraphics[width=0.9\\linewidth]{" }),
+        i(2, "path/to/image.pdf"),
+        t({ "}", "\\caption{" }),
+        i(3, "Some text here."),
+        t({ "}", "\\label{fig:" }),
+        i(4, "label-1"),
+        t({ "}", "\\end{subfigure}", "\\begin{subfigure}{0.5\\textwidth}", "\\includegraphics[width=0.9\\linewidth]{" }),
+        i(5, "path/to/image.pdf"),
+        t({ "}", "\\caption{" }),
+        i(6, "Some text here."),
+        t({ "}", "\\label{fig:" }),
+        i(7, "label-2"),
+        t({ "}", "\\end{subfigure}", "", "\\caption{" }),
+        i(8, "Caption for the whole figure here."),
+        t({ "}", "\\label{fig:" }),
+        i(9, "label"),
+        t({ "}", "\\end{figure}" }),
+    }),
+
     -- MATH ENVIRONMENTS
     -- inline math
     s({ trig = "mk", wordTrig = true, snippetType = "autosnippet" }, {
