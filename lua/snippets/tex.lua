@@ -222,17 +222,32 @@ M = {
         t({ "", "\\]", "" }),
     }),
 
-    -- equation
-    s({ trig = "BEQ", wordTrig = true, snippetType = "autosnippet", condition = line_begin }, {
-        t({ "\\begin{equation}", "\t" }),
-        i(1),
-        t({ "", "\\end{equation}", "" }),
+    -- numbered equation
+    s({
+        trig = "BEQ",
+        wordTrig = true,
+        snippetType = "autosnippet",
+        condition = line_begin,
+    }, {
+        t({ "\\begin{equation} \\label{eq:" }),
+        i(1, "label"),
+        t({ "}", "\t" }),
+        i(2, "body"),
+        c(3, {
+            sn(nil, {
+                t(" . \\tag{"),
+                i(1, "TAG"),
+                t("}"),
+            }),
+            t(" ."),
+        }),
+        t({ "", "\\end{equation}" }),
     }),
 
     -- unnumbered equation
     s({ trig = "BSEQ", wordTrig = true, snippetType = "autosnippet", condition = line_begin }, {
         t({ "\\begin{equation*}", "\t" }),
-        i(1),
+        i(1, "body"),
         t({ "", "\\end{equation*}", "" }),
     }),
 
@@ -243,7 +258,7 @@ M = {
         t({ "", "\\end{subequations}", "" }),
     }),
 
-    -- gather
+    -- numbered gather
     s({ trig = "BGA", wordTrig = true, snippetType = "autosnippet", condition = line_begin }, {
         t({ "\\begin{gather}", "\t" }),
         i(1),
@@ -257,10 +272,12 @@ M = {
         t({ "", "\\end{gather*}", "" }),
     }),
 
-    -- align
+    -- numbered align
     s({ trig = "BAL", wordTrig = true, snippetType = "autosnippet", condition = line_begin }, {
-        t({ "\\begin{align}", "\t" }),
-        i(1),
+        t({ "\\begin{align} \\label{eq:" }),
+        i(1, "label"),
+        t({ "}", "" }),
+        i(2, "body"),
         t({ "", "\\end{align}", "" }),
     }),
 

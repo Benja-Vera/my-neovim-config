@@ -3,6 +3,7 @@ local s = ls.snippet
 local t = ls.text_node
 local i = ls.insert_node
 local c = ls.choice_node
+local d = ls.dynamic_node
 local sn = ls.snippet_node
 
 local fmt = require("luasnip.extras.fmt").fmt
@@ -16,16 +17,42 @@ end
 M = {
     -- FONT
     -- italic
-    s("italic", {
+    s({ trig = "FIT", snippetType = "autosnippet" }, {
         t("*"),
-        i(1, "text"),
+        d(1, function(args, parent)
+            local env = parent.snippet.env
+            if #env.LS_SELECT_RAW > 0 then
+                -- If text is selected, return the selection
+                return sn(nil, {
+                    t(env.LS_SELECT_RAW),
+                })
+            else
+                -- Otherwise, provide an empty insert node
+                return sn(nil, {
+                    i(1),
+                })
+            end
+        end, {}),
         t("* "),
     }),
 
     -- bold
     s("bold", {
         t("**"),
-        i(1, "text"),
+        d(1, function(args, parent)
+            local env = parent.snippet.env
+            if #env.LS_SELECT_RAW > 0 then
+                -- If text is selected, return the selection
+                return sn(nil, {
+                    t(env.LS_SELECT_RAW),
+                })
+            else
+                -- Otherwise, provide an empty insert node
+                return sn(nil, {
+                    i(1),
+                })
+            end
+        end, {}),
         t("** "),
     }),
 
@@ -255,78 +282,6 @@ M = {
         t({ "", "\\end{vmatrix}" }),
     }),
 
-    -- numbered align
-    s({
-        trig = "BAL",
-        snippetType = "autosnippet",
-        condition = in_mathzone,
-        show_condition = in_mathzone,
-    }, {
-        t({ "\\begin{align} \\label{eq:" }),
-        i(1, "label"),
-        t({ "}", "" }),
-        i(2, "body"),
-        t({ "", "\\end{align}" }),
-    }),
-
-    -- unnumbered align
-    s({
-        trig = "BSAL",
-        snippetType = "autosnippet",
-        condition = in_mathzone,
-        show_condition = in_mathzone,
-    }, {
-        t({ "\\begin{align*}", "" }),
-        i(1),
-        t({ "", "\\end{align*}" }),
-    }),
-
-    -- array
-    s({
-        trig = "BAR",
-        snippetType = "autosnippet",
-        condition = in_mathzone,
-        show_condition = in_mathzone,
-    }, {
-        t({ "\\begin{array}{c}", "" }),
-        i(1),
-        t({ "", "\\end{array}" }),
-    }),
-
-    -- numbered equation
-    s({
-        trig = "BEQ",
-        snippetType = "autosnippet",
-        condition = in_mathzone,
-        show_condition = in_mathzone,
-    }, {
-        t({ "\\begin{equation} \\label{eq:" }),
-        i(1, "label"),
-        t({ "}", "\t" }),
-        i(2, "body"),
-        c(3, {
-            sn(nil, {
-                t(" . \\tag{"),
-                i(1, "TAG"),
-                t("}"),
-            }),
-            t(" ."),
-        }),
-        t({ "", "\\end{equation}" }),
-    }),
-
-    -- cases
-    s({
-        trig = "BCAS",
-        snippetType = "autosnippet",
-        condition = in_mathzone,
-        show_condition = in_mathzone,
-    }, {
-        t({ "\\begin{cases}", "\t" }),
-        i(1),
-        t({ "", "\\end{cases}", "" }),
-    }),
-
     -- GEN -> \langle #1 \rangle #2
     s({
         trig = "GEN",
@@ -368,6 +323,116 @@ M = {
         t({ "$$", "\t" }),
         i(1),
         t({ "", "$$", "" }),
+    }),
+
+    -- numbered equation
+    s({
+        trig = "BEQ",
+        snippetType = "autosnippet",
+        condition = in_mathzone,
+        show_condition = in_mathzone,
+    }, {
+        t({ "\\begin{equation} \\label{eq:" }),
+        i(1, "label"),
+        t({ "}", "\t" }),
+        i(2, "body"),
+        c(3, {
+            sn(nil, {
+                t(" . \\tag{"),
+                i(1, "TAG"),
+                t("}"),
+            }),
+            t(" ."),
+        }),
+        t({ "", "\\end{equation}" }),
+    }),
+
+    -- subequations
+    s({
+        trig = "BSE",
+        wordTrig = true,
+        condition = in_mathzone,
+        show_condition = in_mathzone,
+    }, {
+        t({ "\\begin{subequations}", "" }),
+        i(1),
+        t({ "", "\\end{subequations}", "" }),
+    }),
+
+    -- gather
+    s({
+        trig = "BGA",
+        wordTrig = true,
+        snippetType = "autosnippet",
+        condition = in_mathzone,
+        show_condition = in_mathzone,
+    }, {
+        t({ "\\begin{gather}", "\t" }),
+        i(1),
+        t({ "", "\\end{gather}", "" }),
+    }),
+
+    -- unnumbered gather
+    s({
+        trig = "BSGA",
+        wordTrig = true,
+        snippetType = "autosnippet",
+        condition = in_mathzone,
+        show_condition = in_mathzone,
+    }, {
+        t({ "\\begin{gather*}", "\t" }),
+        i(1),
+        t({ "", "\\end{gather*}", "" }),
+    }),
+
+    -- numbered align
+    s({
+        trig = "BAL",
+        snippetType = "autosnippet",
+        condition = in_mathzone,
+        show_condition = in_mathzone,
+    }, {
+        t({ "\\begin{align} \\label{eq:" }),
+        i(1, "label"),
+        t({ "}", "" }),
+        i(2, "body"),
+        t({ "", "\\end{align}", "" }),
+    }),
+
+    -- unnumbered align
+    s({
+        trig = "BSAL",
+        snippetType = "autosnippet",
+        condition = in_mathzone,
+        show_condition = in_mathzone,
+    }, {
+        t({ "\\begin{align*}", "" }),
+        i(1),
+        t({ "", "\\end{align*}", "" }),
+    }),
+
+    -- array
+    s({
+        trig = "BAR",
+        snippetType = "autosnippet",
+        condition = in_mathzone,
+        show_condition = in_mathzone,
+    }, {
+        t({ "\\begin{array}{c}", "" }),
+        i(1),
+        t({ "", "\\end{array}" }),
+    }),
+
+    -- cases
+    s({
+        trig = "BCAS",
+        snippetType = "autosnippet",
+        condition = in_mathzone,
+        show_condition = in_mathzone,
+    }, {
+        t({ "\\begin{cases}", "\t" }),
+        i(1),
+        t({ "", "\\end{cases}", "" }),
     }),
 }
 
