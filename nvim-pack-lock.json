@@ -14,6 +14,10 @@
       "rev": "2207d9c39b66bbd2576bc278d3a82a53e13cf36b",
       "src": "https://github.com/AmberLehmann/candyland.nvim"
     },
+    "cmp-pandoc-references": {
+      "rev": "130eae4f75029d6495808e0ea4b769fa1ce4c9ac",
+      "src": "https://github.com/jmbuhr/cmp-pandoc-references"
+    },
     "conform.nvim": {
       "rev": "18aeab3d63d350dcf44d64c462cc489a3412af40",
       "src": "https://github.com/stevearc/conform.nvim"
@@ -142,10 +146,6 @@
     "vimtex": {
       "rev": "182ad387e3f3107699483606c9a2b6648f8437b2",
       "src": "https://github.com/lervag/vimtex"
-    },
-    "vimwiki": {
-      "rev": "a54a3002e229c4b43d69ced170ff77663a5b2c40",
-      "src": "https://github.com/vimwiki/vimwiki"
     },
     "which-key.nvim": {
       "rev": "3aab2147e74890957785941f0c1ad87d0a44c15a",

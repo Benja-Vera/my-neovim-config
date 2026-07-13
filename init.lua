@@ -773,7 +773,14 @@ require("blink.cmp").setup({
     },
 
     sources = {
-        default = { "lsp", "path", "snippets", "omni" },
+        default = { "lsp", "path", "snippets", "omni", "references" },
+
+        providers = {
+            references = {
+                name = "pandoc-references",
+                module = "cmp-pandoc-references.blink",
+            },
+        },
     },
 
     snippets = { preset = "luasnip" },
