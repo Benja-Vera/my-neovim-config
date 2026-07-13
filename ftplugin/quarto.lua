@@ -16,6 +16,7 @@ ls.add_snippets("quarto", require("snippets.general.operators"))
 ls.add_snippets("quarto", require("snippets.general.postfix"))
 ls.add_snippets("quarto", require("snippets.general.common"))
 ls.add_snippets("quarto", require("snippets.general.fractions"))
+ls.add_snippets("quarto", require("snippets.specific.quarto_notes.alphabet"))
 require("quarto.quarto-math-mappings")()
 
 vim.opt_local.spell = true

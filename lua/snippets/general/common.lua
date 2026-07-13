@@ -123,6 +123,17 @@ return {
         t("^{c}"),
     }),
 
+    -- trans -> ^\top
+    s({
+        trig = "trans",
+        snippetType = "autosnippet",
+        condition = in_mathzone,
+        show_condition = in_mathzone,
+        wordTrig = false,
+    }, {
+        t("^{\\top}"),
+    }),
+
     -- inv -> ^{-1}
     s({
         trig = "inv",
