@@ -88,7 +88,7 @@ return {
     }),
 
     -- Underbrace: (something)._ -> \underbrace{something}_{|}
-    postfix({ trig = "._", match_pattern = "%b()", snippetType = "autosnippet", condition = in_mathzone, show_condition = no_show }, {
+    postfix({ trig = "._", match_pattern = "%b()$", snippetType = "autosnippet", condition = in_mathzone, show_condition = no_show }, {
         f(function(_, parent)
             return "\\underbrace{" .. parent.snippet.env.POSTFIX_MATCH:sub(2, -2) .. "}_{"
         end, {}),

@@ -47,7 +47,7 @@ return {
     }),
 
     -- Fractions: (something)./ -> \frac{something}{|}
-    postfix({ trig = "./", match_pattern = "%b()", snippetType = "autosnippet", condition = in_mathzone }, {
+    postfix({ trig = "./", match_pattern = "%b()$", snippetType = "autosnippet", condition = in_mathzone }, {
         f(function(_, parent)
             return "\\frac{" .. parent.snippet.env.POSTFIX_MATCH:sub(2, -2) .. "}{"
         end, {}),
