@@ -399,7 +399,7 @@ return {
     }),
 
     -- mq -> \kktproduction
-    s({ trig = "mq", snippettype = "autosnippet", condition = in_mathzone }, {
+    s({ trig = "mq", snippetType = "autosnippet", condition = in_mathzone }, {
         t("\\kktproduction"),
         c(1, {
             t(""),
@@ -414,7 +414,7 @@ return {
     }),
 
     -- mf -> \kktflow
-    s({ trig = "mf", snippettype = "autosnippet", condition = in_mathzone }, {
+    s({ trig = "mf", snippetType = "autosnippet", condition = in_mathzone }, {
         t("\\kktflow"),
         c(1, {
             t(""),
@@ -429,7 +429,7 @@ return {
     }),
 
     -- ms -> \kktstorage
-    s({ trig = "ms", snippettype = "autosnippet", condition = in_mathzone }, {
+    s({ trig = "ms", snippetType = "autosnippet", condition = in_mathzone }, {
         t("\\kktstorage"),
         c(1, {
             t(""),
