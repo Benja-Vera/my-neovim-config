@@ -18,32 +18,55 @@ return {
         t(" \\}"),
     }),
 
-    -- "=>" -> \implies
+    -- -- "=>" -> \implies
+    -- s({
+    --     trig = "=>",
+    --     wordTrig = true,
+    --     snippetType = "autosnippet",
+    --     condition = in_mathzone,
+    --     show_condition = in_mathzone,
+    -- }, {
+    --     t("\\implies"),
+    -- }),
+
+    -- -- "->>" -> \twoheadrightarrow
+    -- s({
+    --     trig = "->>",
+    --     wordTrig = true,
+    --     snippetType = "autosnippet",
+    --     condition = in_mathzone,
+    --     show_condition = in_mathzone,
+    -- }, {
+    --     t("\\twoheadrightarrow"),
+    -- }),
+    --
+
+    -- ++ -> ^+
     s({
-        trig = "=>",
-        wordTrig = true,
+        trig = "++",
+        wordTrig = false,
         snippetType = "autosnippet",
         condition = in_mathzone,
         show_condition = in_mathzone,
     }, {
-        t("\\implies"),
+        t("^+"),
     }),
 
-    -- "->>" -> \twoheadrightarrow
+    -- -- -> ^-
     s({
-        trig = "->>",
-        wordTrig = true,
+        trig = "--",
+        wordTrig = false,
         snippetType = "autosnippet",
         condition = in_mathzone,
         show_condition = in_mathzone,
     }, {
-        t("\\twoheadrightarrow"),
+        t("^-"),
     }),
 
     -- oo -> \infty
     s({
         trig = "oo",
-        wordTrig = false,
+        wordTrig = true,
         snippetType = "autosnippet",
         condition = in_mathzone,
         show_condition = in_mathzone,
@@ -155,18 +178,16 @@ return {
 
     -- dd -> \mathrm{d}
     s({ trig = "dd", snippetType = "autosnippet", condition = in_mathzone, show_condition = in_mathzone }, {
-        t("\\mathrm{d}"),
+        t("\\; \\mathrm{d}"),
     }),
 
-    -- LIM -> \lim_{#1 \to #2} #3 #0
+    -- LIM -> \lim_{#1 \to #2} #0
     s({ trig = "LIM", snippetType = "autosnippet", condition = in_mathzone, show_condition = in_mathzone }, {
         t("\\lim_{"),
         i(1),
         t(" \\to "),
         i(2),
         t("} "),
-        i(3),
-        t(" "),
         i(0),
     }),
 

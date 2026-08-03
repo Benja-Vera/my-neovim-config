@@ -14,10 +14,19 @@ local in_mathzone = function()
     return vim.fn["vimtex#syntax#in_mathzone"]() == 1
 end
 
+-- Check if we are in the beginning of a line
+local line_begin = function(line_to_cursor)
+    return #line_to_cursor == 0
+end
+
 M = {
     -- FONT
     -- italic
-    s({ trig = "FIT", snippetType = "autosnippet" }, {
+    s({
+        trig = "FIT",
+        snippetType = "autosnippet",
+        hidden = true,
+    }, {
         t("*"),
         d(1, function(args, parent)
             local env = parent.snippet.env
@@ -37,7 +46,11 @@ M = {
     }),
 
     -- bold
-    s("bold", {
+    s({
+        trig = "FBF",
+        snippetType = "autosnippet",
+        hidden = true,
+    }, {
         t("**"),
         d(1, function(args, parent)
             local env = parent.snippet.env
@@ -57,15 +70,35 @@ M = {
     }),
 
     -- code
-    s("inline-code", {
+    s({
+        trig = "FTT",
+        snippetType = "autosnippet",
+        hidden = true,
+    }, {
         t("`"),
-        i(1, "text"),
+        d(1, function(args, parent)
+            local env = parent.snippet.env
+            if #env.LS_SELECT_RAW > 0 then
+                -- If text is selected, return the selection
+                return sn(nil, {
+                    t(env.LS_SELECT_RAW),
+                })
+            else
+                -- Otherwise, provide an empty insert node
+                return sn(nil, {
+                    i(1),
+                })
+            end
+        end, {}),
         t("`"),
     }),
 
     -- BLOCKS
     -- executable code block
-    s("executable-codeblock", {
+    s({
+        trig = "executable-codeblock",
+        show_condition = line_begin,
+    }, {
         t("```{"),
         i(1, "lang"),
         t({ "}", "#| code-fold: true", "" }),
@@ -75,7 +108,10 @@ M = {
 
     -- definition
     s(
-        "def",
+        {
+            trig = "def",
+            show_condition = line_begin,
+        },
         fmt(
             [[
     ::: {{#def-{}}}
@@ -118,7 +154,7 @@ M = {
             {
                 i(1, "label"), -- label only for the exercise
                 c(2, {
-                    fmt("## {}\n", i(1, "Exercise Title")), -- optional title
+                    fmt("## {}\n", i(1, "exercise title")), -- optional title
                     t(""), -- no title
                 }),
                 i(3, "Problem body"),
@@ -129,6 +165,7 @@ M = {
     -- solution
     s({
         trig = "solucion",
+        show_condition = line_begin,
     }, {
         t({
             "::: {.callout collapse=true}",
@@ -164,6 +201,7 @@ M = {
     -- Conclusión
     s({
         trig = "conclusión",
+        show_condition = line_begin,
     }, {
         t({
             "::: {.callout-tip icon=false}",
@@ -186,7 +224,7 @@ M = {
         trig = "DV",
         snippetType = "autosnippet",
         condition = in_mathzone,
-        show_condition = in_mathzone,
+        hidden = true,
     }, {
         t("\\frac{\\mathrm{d} "),
         i(1, "f"),
@@ -200,7 +238,7 @@ M = {
         trig = "PDV",
         snippetType = "autosnippet",
         condition = in_mathzone,
-        show_condition = in_mathzone,
+        hidden = true,
     }, {
         t("\\frac{\\partial "),
         i(1, "f"),
@@ -214,7 +252,7 @@ M = {
         trig = "DVN",
         snippetType = "autosnippet",
         condition = in_mathzone,
-        show_condition = in_mathzone,
+        hidden = true,
     }, {
         t("\\frac{\\mathrm{d}^{"),
         i(1, "n"),
@@ -232,7 +270,7 @@ M = {
         trig = "PDVN",
         snippetType = "autosnippet",
         condition = in_mathzone,
-        show_condition = in_mathzone,
+        hidden = true,
     }, {
         t("\\frac{\\partial^{"),
         i(1, "n"),
@@ -251,7 +289,7 @@ M = {
         trig = "BMAT",
         snippetType = "autosnippet",
         condition = in_mathzone,
-        show_condition = in_mathzone,
+        hidden = true,
     }, {
         t({ "\\begin{bmatrix}", "" }),
         i(1),
@@ -263,7 +301,7 @@ M = {
         trig = "PMAT",
         snippetType = "autosnippet",
         condition = in_mathzone,
-        show_condition = in_mathzone,
+        hidden = true,
     }, {
         t({ "\\begin{pmatrix}", "" }),
         i(1),
@@ -275,7 +313,7 @@ M = {
         trig = "VMAT",
         snippetType = "autosnippet",
         condition = in_mathzone,
-        show_condition = in_mathzone,
+        hidden = true,
     }, {
         t({ "\\begin{vmatrix}", "" }),
         i(1),
@@ -312,14 +350,24 @@ M = {
 
     -- MATH ENVIRONMENTS
     -- inline math
-    s({ trig = "mk", wordTrig = true, snippetType = "autosnippet" }, {
+    s({
+        trig = "mk",
+        wordTrig = true,
+        snippetType = "autosnippet",
+        hidden = true,
+    }, {
         t("$"),
         i(1),
         t("$"),
     }),
 
     -- display math
-    s({ trig = "dm", wordTrig = true, snippetType = "autosnippet" }, {
+    s({
+        trig = "dm",
+        wordTrig = true,
+        snippetType = "autosnippet",
+        hidden = true,
+    }, {
         t({ "$$", "\t" }),
         i(1),
         t({ "", "$$", "" }),

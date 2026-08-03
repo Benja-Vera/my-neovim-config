@@ -300,6 +300,42 @@ M = {
         t({ "", "\\end{cases}", "" }),
     }),
 
+    -- bracket matrix
+    s({
+        trig = "BMAT",
+        snippetType = "autosnippet",
+        condition = in_mathzone,
+        show_condition = in_mathzone,
+    }, {
+        t({ "\\begin{bmatrix}", "" }),
+        i(1),
+        t({ "", "\\end{bmatrix}" }),
+    }),
+
+    -- parentheses matrix
+    s({
+        trig = "PMAT",
+        snippetType = "autosnippet",
+        condition = in_mathzone,
+        show_condition = in_mathzone,
+    }, {
+        t({ "\\begin{pmatrix}", "" }),
+        i(1),
+        t({ "", "\\end{pmatrix}" }),
+    }),
+
+    -- determinant matrix
+    s({
+        trig = "VMAT",
+        snippetType = "autosnippet",
+        condition = in_mathzone,
+        show_condition = in_mathzone,
+    }, {
+        t({ "\\begin{vmatrix}", "" }),
+        i(1),
+        t({ "", "\\end{vmatrix}" }),
+    }),
+
     -- LIST ENVIRONMENTS
     -- itemize
     s({ trig = "BIT", wordTrig = true, snippetType = "autosnippet", condition = line_begin }, {
