@@ -94,6 +94,16 @@ return {
         t("\\dots"),
     }),
 
+    -- || -> \;|\;
+    s({
+        trig = "||",
+        snippetType = "autosnippet",
+        condition = in_mathzone,
+        show_condition = in_mathzone,
+    }, {
+        t("\\;|\\;"),
+    }),
+
     -- txt -> \text{|}
     s({
         trig = "txt",
@@ -184,9 +194,9 @@ return {
     -- LIM -> \lim_{#1 \to #2} #0
     s({ trig = "LIM", snippetType = "autosnippet", condition = in_mathzone, show_condition = in_mathzone }, {
         t("\\lim_{"),
-        i(1),
+        i(1, "n"),
         t(" \\to "),
-        i(2),
+        i(2, "\\infty"),
         t("} "),
         i(0),
     }),

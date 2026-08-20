@@ -48,7 +48,7 @@ return {
     -- \alphahat -> \hat{\alpha}
     postfix({
         trig = "hat",
-        match_pattern = [[[\\%w%.%_%-%"%']+$]],
+        match_pattern = [[[\\%w%.%_%-%"%'%{%}]+$]],
         condition = in_mathzone,
         show_condition = no_show,
         snippetType = "autosnippet",

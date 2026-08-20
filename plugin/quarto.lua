@@ -7,6 +7,7 @@ vim.pack.add({
 })
 require("quarto").setup({
     lspFeatures = {
+        closePreviewOnExit = true,
         languages = { "python", "julia" },
     },
 })

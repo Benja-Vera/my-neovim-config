@@ -42,7 +42,7 @@ M = {
                 })
             end
         end, {}),
-        t("* "),
+        t("*"),
     }),
 
     -- bold
@@ -66,7 +66,7 @@ M = {
                 })
             end
         end, {}),
-        t("** "),
+        t("**"),
     }),
 
     -- code
@@ -216,6 +216,62 @@ M = {
             "",
             "",
         }),
+    }),
+
+    -- callout-def (tip)
+    s({
+        trig = "callout-def",
+        show_condition = line_begin,
+    }, {
+        t({ "::: {.callout-tip}", "", "### Definición: " }),
+        i(1, "name"),
+        t({ "", "", "" }),
+        i(2, "body"),
+        t({ "", "", ":::", "" }),
+        i(0),
+    }),
+
+    -- callout-prop (note)
+    s({
+        trig = "callout-prop",
+        show_condition = line_begin,
+    }, {
+        t({ "::: {.callout-note}", "", "### Proposición: " }),
+        i(1, "name"),
+        t({ "", "", "" }),
+        i(2, "body"),
+        t({ "", "", ":::", "" }),
+        i(0),
+    }),
+
+    -- callout-warn (warning)
+    s({
+        trig = "callout-warn",
+        show_condition = line_begin,
+    }, {
+        t({ "::: {.callout-warning}", "", "### Nota: " }),
+        i(1, "name"),
+        t({ "", "", "" }),
+        i(2, "body"),
+        t({ "", "", ":::", "" }),
+        i(0),
+    }),
+
+    -- panel-tabset
+    s({
+        trig = "panel-tabset",
+        show_condition = line_begin,
+    }, {
+        t({ "::: {.panel-tabset}", "", "### " }),
+        i(1, "tab 1 title"),
+        t({ "", "", "" }),
+        i(2, "tab 1 body"),
+        t({ "", "", "### " }),
+        i(3, "tab 2 title"),
+        t({ "", "", "" }),
+        i(4, "tab 2 body"),
+        t({ "", "", ":::", "" }),
+        i(0),
     }),
 
     -- DIFFERENTIAL OPERATORS

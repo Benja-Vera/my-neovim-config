@@ -4,7 +4,5 @@ vim.opt_local.spelllang = { "en" }
 local opts = { noremap = true }
 vim.keymap.set("n", "j", "gj", opts)
 vim.keymap.set("n", "k", "gk", opts)
-vim.keymap.set("v", "j", "gj", opts)
-vim.keymap.set("v", "k", "gk", opts)
-vim.keymap.set("s", "j", "j", opts)
-vim.keymap.set("s", "k", "k", opts)
+vim.keymap.set("x", "j", "gj", opts)
+vim.keymap.set("x", "k", "gk", opts)

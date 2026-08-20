@@ -5,7 +5,7 @@ local ls = require("luasnip")
 
 vim.bo.omnifunc = "v:lua.require'quarto.omnifunc'.eqref"
 
-vim.keymap.set("n", "<leader>qp", ":QuartoPreview<CR>", {
+vim.keymap.set("n", "<leader>qp", ":QuartoPreview --to all <CR>", {
     noremap = true,
     silent = true,
     desc = "Preview Quarto document",

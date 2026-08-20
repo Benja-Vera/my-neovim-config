@@ -12,3 +12,4 @@ elseif is_linux then
 end
 vim.g.vimtex_imaps_leader = "~"
 vim.g.vimtex_quickfix_autoclose_after_keystrokes = 2
+vim.g.vimtex_fold_enabled = true
