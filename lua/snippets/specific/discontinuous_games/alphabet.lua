@@ -175,7 +175,16 @@ return {
         t("\\mathcal{S}"),
     }),
 
-    -- T not defined as in macro
+    -- T
+    s({
+        trig = "TT",
+        wordTrig = true,
+        snippetType = "autosnippet",
+        condition = in_mathzone,
+        show_condition = in_mathzone,
+    }, {
+        t("\\mathcal{T}"),
+    }),
 
     -- U
     s({
