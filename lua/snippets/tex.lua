@@ -140,7 +140,7 @@ M = {
 
     -- frame
     s({ trig = "BFR", snippetType = "autosnippet" }, {
-        t("\\begin{frame}"),
+        t({ "\\begin{frame}", "" }),
         d(1, function(args, parent)
             local env = parent.snippet.env
             if #env.LS_SELECT_RAW > 0 then
@@ -154,6 +154,7 @@ M = {
                 return sn(nil, {
                     t("\t\\frametitle{"),
                     i(1, "title of the frame"),
+                    t({ "}", "", "\t" }),
                     i(2, "body"),
                 })
             end
