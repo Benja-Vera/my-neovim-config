@@ -776,6 +776,10 @@ require("blink.cmp").setup({
     sources = {
         default = { "lsp", "path", "snippets", "omni", "references" },
 
+        per_filetype = {
+            tex = { "path", "snippets", "omni", "references" },
+        },
+
         providers = {
             references = {
                 name = "pandoc-references",
