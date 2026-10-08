@@ -128,7 +128,7 @@ do
 
     -- NOTE: Here you put the default colorscheme, and specify other overwrite prpeferences in dedicated ftplugin files.
     -- I thought of bundling the functionality in a deidcated file but it results in flickering.
-    vim.cmd.colorscheme("tokyonight-night")
+    vim.cmd.colorscheme("gruvbox")
 
     vim.pack.add({ gh("folke/todo-comments.nvim") })
     require("todo-comments").setup({ signs = false })
@@ -438,8 +438,8 @@ do
     local servers = {
         -- clangd = {},
         -- gopls = {},
-        pyright = {},
-        bashls = {},
+        -- pyright = {},
+        -- bashls = {},
         -- rust_analyzer = {},
         --
         -- Some languages (like typescript) have entire language plugins that can be useful:
