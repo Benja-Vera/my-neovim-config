@@ -785,7 +785,7 @@ require("blink.cmp").setup({
     },
 
     sources = {
-        default = { "lsp", "path", "snippets", "omni", "references" },
+        default = { "lsp", "path", "snippets", "omni", "references", "eqref" },
 
         per_filetype = {
             tex = { "path", "snippets", "omni", "references" },
@@ -795,6 +795,10 @@ require("blink.cmp").setup({
             references = {
                 name = "pandoc_references",
                 module = "cmp-pandoc-references.blink",
+            },
+            eqref = {
+                name = "Eqref",
+                module = "quarto.eqref",
             },
         },
     },
