@@ -18,6 +18,20 @@ return {
         t(" \\}"),
     }),
 
+    -- CEIL -> \lceil | \rceil
+    s({ trig = "CEIL", snippetType = "autosnippet", condition = in_mathzone, show_condition = in_mathzone }, {
+        t("\\lceil "),
+        i(1),
+        t(" \\rceil"),
+    }),
+
+    -- FLOOR -> \lfloor | \rfloor
+    s({ trig = "FLOOR", snippetType = "autosnippet", condition = in_mathzone, show_condition = in_mathzone }, {
+        t("\\lfloor "),
+        i(1),
+        t(" \\rfloor"),
+    }),
+
     -- -- "=>" -> \implies
     -- s({
     --     trig = "=>",
@@ -186,10 +200,10 @@ return {
         i(0),
     }),
 
-    -- dd -> \mathrm{d}
-    s({ trig = "dd", snippetType = "autosnippet", condition = in_mathzone, show_condition = in_mathzone }, {
-        t("\\; \\mathrm{d}"),
-    }),
+    -- -- dd -> \mathrm{d}
+    -- s({ trig = "dd", snippetType = "autosnippet", condition = in_mathzone, show_condition = in_mathzone }, {
+    --     t("\\; \\mathrm{d}"),
+    -- }),
 
     -- LIM -> \lim_{#1 \to #2} #0
     s({ trig = "LIM", snippetType = "autosnippet", condition = in_mathzone, show_condition = in_mathzone }, {

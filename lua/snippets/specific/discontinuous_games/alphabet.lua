@@ -2,24 +2,25 @@ local ls = require("luasnip")
 local s = ls.snippet
 local t = ls.text_node
 local i = ls.insert_node
+local f = ls.function_node
 
 local in_mathzone = function()
     return vim.fn["vimtex#syntax#in_mathzone"]() == 1
 end
 
 return {
-    -- generic mathcal
+    -- generic mathcal with auto-captured single character
     s({
-        trig = "CAL",
-        wordTrig = true,
+        trig = "CAL([a-zA-Z])",
+        regTrig = true,
+        wordTrig = false,
         snippetType = "autosnippet",
         condition = in_mathzone,
         show_condition = in_mathzone,
     }, {
-        t("\\mathcal{"),
-        i(1),
-        t("}"),
-        filetype = {},
+        f(function(_, snip)
+            return "\\mathcal{" .. snip.captures[1] .. "}"
+        end),
     }),
 
     -- A

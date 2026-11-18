@@ -459,7 +459,20 @@ M = {
         show_condition = in_mathzone,
     }, {
         t({ "\\begin{subequations}", "" }),
-        i(1),
+        d(1, function(args, parent)
+            local env = parent.snippet.env
+            if #env.LS_SELECT_RAW > 0 then
+                -- If text is selected, return the selection
+                return sn(nil, {
+                    t(env.LS_SELECT_RAW),
+                })
+            else
+                -- Otherwise, provide an empty insert node
+                return sn(nil, {
+                    i(1),
+                })
+            end
+        end, {}),
         t({ "", "\\end{subequations}", "" }),
     }),
 

@@ -126,9 +126,28 @@ do
     vim.pack.add({ gh("rebelot/kanagawa.nvim") })
     vim.pack.add({ gh("AmberLehmann/candyland.nvim") })
 
-    -- NOTE: Here you put the default colorscheme, and specify other overwrite prpeferences in dedicated ftplugin files.
-    -- I thought of bundling the functionality in a deidcated file but it results in flickering.
-    vim.cmd.colorscheme("gruvbox")
+    -- NOTE: Here I can cleanly set up the various colorschemes depending on filetype
+    local default_scheme = "gruvbox"
+    local ft_schemes = {
+        tex = "gruvbox",
+        bib = "gruvbox",
+        quarto = "kanagawa-dragon",
+        markdown = "kanagawa-dragon",
+        lua = "tokyonight-night",
+        python = "gruvbox",
+        julia = "candyland",
+        json = "kanagawa-dragon",
+        yaml = "kanagawa-dragon",
+    }
+    vim.api.nvim_create_autocmd("BufEnter", {
+        group = vim.api.nvim_create_augroup("FiletypeColorscheme", { clear = true }),
+        callback = function(ev)
+            local target = ft_schemes[vim.bo[ev.buf].filetype] or default_scheme
+            if vim.g.colors_name ~= target then
+                vim.cmd.colorscheme(target)
+            end
+        end,
+    })
 
     vim.pack.add({ gh("folke/todo-comments.nvim") })
     require("todo-comments").setup({ signs = false })
@@ -438,7 +457,9 @@ do
     local servers = {
         -- clangd = {},
         -- gopls = {},
-        -- pyright = {},
+        pyright = {},
+        ruff = {},
+        matlab_ls = {},
         -- bashls = {},
         -- rust_analyzer = {},
         --
@@ -742,11 +763,6 @@ require("blink.cmp").setup({
         -- 'enter' for enter to accept
         -- 'none' for no mappings
         --
-        -- For an understanding of why the 'default' preset is recommended,
-        -- you will need to read `:help ins-completion`
-        --
-        -- No, but seriously. Please read `:help ins-completion`, it is really good!
-        --
         -- All presets have the following mappings:
         -- <tab>/<s-tab>: move to right/left of your snippet expansion
         -- <c-space>: Open menu or open docs if already open
@@ -756,14 +772,9 @@ require("blink.cmp").setup({
         --
         -- See `:help blink-cmp-config-keymap` for defining your own keymap
         preset = "default",
-
-        -- For more advanced Luasnip keymaps (e.g. selecting choice nodes, expansion) see:
-        --    https://github.com/L3MON4D3/LuaSnip?tab=readme-ov-file#keymaps
     },
 
     appearance = {
-        -- 'mono' (default) for 'Nerd Font Mono' or 'normal' for 'Nerd Font'
-        -- Adjusts spacing to ensure icons are aligned
         nerd_font_variant = "mono",
     },
 
@@ -782,7 +793,7 @@ require("blink.cmp").setup({
 
         providers = {
             references = {
-                name = "pandoc-references",
+                name = "pandoc_references",
                 module = "cmp-pandoc-references.blink",
             },
         },
@@ -790,13 +801,6 @@ require("blink.cmp").setup({
 
     snippets = { preset = "luasnip" },
 
-    -- Blink.cmp includes an optional, recommended rust fuzzy matcher,
-    -- which automatically downloads a prebuilt binary when enabled.
-    --
-    -- By default, we use the Lua implementation instead, but you may enable
-    -- the rust implementation via `'prefer_rust_with_warning'`
-    --
-    -- See `:help blink-cmp-config-fuzzy` for more information
     fuzzy = { implementation = "prefer_rust_with_warning" },
 
     -- Shows a signature help window while you type arguments for a function

@@ -1,6 +1,5 @@
 vim.treesitter.stop()
 
-require("quarto.omnifunc")
 local ls = require("luasnip")
 
 vim.bo.omnifunc = "v:lua.require'quarto.omnifunc'.eqref"

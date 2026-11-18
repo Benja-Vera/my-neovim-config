@@ -1,3 +1,5 @@
+vim.g["pandoc#keyboard#display_motions"] = 0
+
 vim.pack.add({
     { src = "https://github.com/vim-pandoc/vim-pandoc-syntax" },
     { src = "https://github.com/vim-pandoc/vim-pandoc" },
